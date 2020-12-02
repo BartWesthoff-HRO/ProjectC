@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectC.Models.Medewerker>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.gebruikersnaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.wachtwoord)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.gebruikersnaam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.wachtwoord)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.medewerkerid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.medewerkerid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.medewerkerid })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ProjectC.Models.klant>
+
+
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bedrijfsnaam)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bedrijfsnaam)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Firstname }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Firstname }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Firstname })
+            </td>
+        </tr>
+    }
+
+</table>*@
+
+
+
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+
+<table class="table">
+    <tr>
+        <th> </th>
+        <th>
+            voornaam
+        </th>
+        <th>
+            tussenvoegsel
+        </th>
+        <th>
+            achternaam
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            bedrijfsnaam
+        </th>
+        <th></th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="~/klant/Edit/@item.persoonid.ToString()" class="btn"> inzien</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.voornaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tussenvoegsel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.achternaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+
+            <td>
+                Bart BV.
+            </td>
+            <td>
+                <a href="~/Contactpersons/Delete/@item.persoonid.ToString()" class="btn"> verwijderen</a>
+            </td>
+            <td></td>
+
+
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.personid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.personid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.personid })
+                </td>*@
+        </tr>
+    }
+
+
+
+
+</table>
+
+<p>
+    <a href="~/klanttoevoegen/create" class="btn"> Klant toevoegen</a>
+    @*<a href="~/labels1/index" class="btn"> Labels</a>*@
+</p>
+
+<img src="~/Content/bgimage.jpg" , height="100%" , width="100%" />

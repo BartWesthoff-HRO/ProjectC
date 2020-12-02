@@ -1,0 +1,12 @@
+﻿@model ProjectC.Models.labels
+<div>
+    @using (Html.BeginForm())
+    {
+@Html.AntiForgeryToken()
+                <input type="submit" value="Delete" class="btn btn-default" id="clickButton" />}
+</div>
+
+<script>window.onload = function () {
+        var button = document.getElementById('clickButton');
+        button.form.submit();
+    }</script>
