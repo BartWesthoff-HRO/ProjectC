@@ -44,30 +44,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
-    <table class="table">
-        <tr>
-            <th> </th>
-            <th>
-                voornaam
-            </th>
-            <th>
-                tussenvoegsel
-            </th>
-            <th>
-                achternaam
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                bedrijfsnaam
-            </th>
-            <th></th>
-            <th>
-            </th>
-        </tr>
+<table class="table">
+    <tr>
+        <th> </th>
+        <th>
+            voornaam
+        </th>
+        <th>
+            tussenvoegsel
+        </th>
+        <th>
+            achternaam
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            bedrijfsnaam
+        </th>
+        <th></th>
+        <th>
+        </th>
+    </tr>
 
-        @foreach (var item in Model)
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Verwijderen", "klant", new { id = item.persoonid }))
         {
             <tr>
                 <td>
@@ -90,7 +92,7 @@
                     Bart BV.
                 </td>
                 <td>
-                    <a href="~/klant/Delete/@item.persoonid.ToString()" class="btn"> verwijderen</a>
+                    <input type="submit" value="Verwijderen" class="btn"/>
                 </td>
                 <td></td>
 
@@ -102,6 +104,7 @@
                     </td>*@
             </tr>
         }
+    }
 
 
 
@@ -113,7 +116,5 @@
         <a href="~/label/index" class="btn"> Labels</a>
         <a href="~/contactperson/index" class="btn"> contactpersonen</a>
     </p>
-
-    <img src="~/Content/bgimage.jpg" , height="100%" , width="100%" />
 
 

@@ -47,6 +47,15 @@ namespace ProjectC.Controllers
         }
 
         // GET: ContactPerson/Edit/5
+
+        [HttpPost]
+        public ActionResult Verwijderen(int id)
+        {
+            ContactPerson contactperson = db.ContactPersons.Where(x => x.persoonid == id).FirstOrDefault();
+            db.ContactPersons.Remove(contactperson);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,30 +87,30 @@ namespace ProjectC.Controllers
         }
 
         // GET: ContactPerson/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ContactPerson contactPerson = db.ContactPersons.Find(id);
-            if (contactPerson == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contactPerson);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ContactPerson contactPerson = db.ContactPersons.Find(id);
+        //    if (contactPerson == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(contactPerson);
+        //}
 
         // POST: ContactPerson/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ContactPerson contactPerson = db.ContactPersons.Find(id);
-            db.ContactPersons.Remove(contactPerson);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    ContactPerson contactPerson = db.ContactPersons.Find(id);
+        //    db.ContactPersons.Remove(contactPerson);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

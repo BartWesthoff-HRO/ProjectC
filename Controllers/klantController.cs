@@ -21,13 +21,20 @@ namespace ProjectC.Controllers
             return View(db.klants.ToList());
         }
 
-        // GET: klant/Details/5
-
-
         // GET: klant/Create
         public ActionResult Create()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Verwijderen(int id)
+        {
+            klant klant = db.klants.Where(x => x.persoonid == id).FirstOrDefault();
+            db.klants.Remove(klant);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: klant/Create

@@ -22,19 +22,7 @@ namespace ProjectC.Controllers
         }
 
         // GET: label/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            labels labels = db.labels.Find(id);
-            if (labels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(labels);
-        }
+     
 
         // GET: label/Create
         public ActionResult Create()
@@ -42,12 +30,21 @@ namespace ProjectC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Verwijderen(int id)
+        {
+            label label = db.labels.Where(x => x.labelid == id).FirstOrDefault();
+            db.labels.Remove(label);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // POST: label/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "labelid,labelname")] labels labels)
+        public ActionResult Create([Bind(Include = "labelid,labelname")] label labels)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +63,7 @@ namespace ProjectC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            labels labels = db.labels.Find(id);
+            label labels = db.labels.Find(id);
             if (labels == null)
             {
                 return HttpNotFound();
@@ -79,7 +76,7 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "labelid,labelname")] labels labels)
+        public ActionResult Edit([Bind(Include = "labelid,labelname")] label labels)
         {
             if (ModelState.IsValid)
             {
@@ -91,31 +88,7 @@ namespace ProjectC.Controllers
         }
 
         // GET: label/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            labels labels = db.labels.Find(id);
-            if (labels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(labels);
-        }
-
-        // POST: label/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            labels labels = db.labels.Find(id);
-            db.labels.Remove(labels);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+     
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -143,3 +143,4 @@ C:\Users\bartw\source\repos\ProjectC\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\bartw\source\repos\ProjectC\bin\Microsoft.EntityFrameworkCore.Relational.Design.dll
 C:\Users\bartw\source\repos\ProjectC\bin\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
 C:\Users\bartw\source\repos\ProjectC\bin\Microsoft.EntityFrameworkCore.Relational.Design.xml
+C:\Users\bartw\source\repos\ProjectC\obj\Debug\ProjectC.csprojAssemblyReference.cache

@@ -8,7 +8,7 @@ using System.Web;
 namespace ProjectC.Models
 {
         [Table("label", Schema = "public")]
-        public class labels
+        public class label
         {
             [Key]
             public int labelid { get; set; }

@@ -1799,10 +1799,19 @@ pre {
         padding: .75rem;
         vertical-align: top;
         border-bottom: 1px solid grey;
+   
+    }
+    .table th{
+        background-color: orange;
     }
     /* test voor selecting rows*/
-    .table tr:hover, tr.selected {
-        background-color: #FFCF8B
+    .table tr:not(thead):hover {
+        background-color: whitesmoke;
+
+            
+    }
+    .table tr:not(head) {
+        background-color: #FEF4EB;
     }
 
 
@@ -5916,28 +5925,17 @@ button.close {
     vertical-align: text-top !important
 }
 
-.box {
-    /* The image used */
-    background-image: url(../Content/bgimage.jpg);
-    /* Full height */
-    height: 100%;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 /* dit is voor de primaire kleur (gebruikt kop header)*/
 .bg-primary {
-    background-color: orange !important
+    background-color: orange
 }
 
 a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover {
-    background-color: #fd7e14 !important
+    background-color: blue !important
 }
 
 .bg-secondary {
-    background-color: creme !important
+    background-color: #FEF4EB
 }
 
 a.bg-secondary:focus, a.bg-secondary:hover, button.bg-secondary:focus, button.bg-secondary:hover {
@@ -5948,7 +5946,7 @@ a.bg-secondary:focus, a.bg-secondary:hover, button.bg-secondary:focus, button.bg
     background-color: #28a745 !important
 }
 
-a.bg-success:focus, a.bg-success:hover, button.bg-success:focus, button.bg-success:hover {
+/*a.bg-success:focus, a.bg-success:hover, button.bg-success:focus, button.bg-success:hover {
     background-color: #1e7e34 !important
 }
 
@@ -5998,7 +5996,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
 
 .bg-transparent {
     background-color: transparent !important
-}
+}*/
 
 .border {
     border: 1px solid #dee2e6 !important
@@ -9078,4 +9076,8 @@ button {
 
 .hide {
     display: none;
+}
+
+.bg-index {
+    background-color: white
 }

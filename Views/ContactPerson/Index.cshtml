@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ProjectC.Models.ContactPerson>
+    
 
 
 @{ ViewBag.Title = "Contact personen";
@@ -6,7 +7,11 @@
 
 
 
+
+
+
 <table class="table">
+   
     <tr>
         <th> </th>
         <th>
@@ -24,6 +29,7 @@
         <th>
             bedrijfsnaam
         </th>
+        <th> labels</th>
         <th></th>
         <th>
         </th>
@@ -31,39 +37,55 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn"> inzien</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.voornaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tussenvoegsel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.achternaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
+        using (Html.BeginForm("Verwijderen", "ContactPerson", new { id = item.persoonid }))
+        {
+<tr>
+    <td>
+        <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn"> inzien</a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.voornaam)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tussenvoegsel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.achternaam)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.email)
+    </td>
 
-            <td>
-                -
-            </td>
-            <td>
-                <a href="~/Contactperson/Delete/@item.persoonid.ToString()" class="btn"> verwijderen</a>
-            </td>
-            <td></td>
+    <td>
+        @foreach (var iets in item.klantlist)
+        {
+            @("[" + iets.voornaam + "] ");
+
+        }
+    </td>
+    <td>
+        @foreach (var iets in item.labellist)
+        {
+               @("[" + iets.labelname + "] ");
+
+        }
+
+    </td>
+    <td>
+        <input type="submit" value="Verwijderen" class="btn" />
+        @* href="~/Contactperson/Delete/@item.persoonid.ToString()"*@
+    </td>
+    <td></td>
 
 
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.personid }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.personid }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.personid })
-                </td>*@
-        </tr>
-}
+    @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.personid }) |
+            @Html.ActionLink("Details", "Details", new { id = item.personid }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.personid })
+        </td>*@
+</tr>
+        }
+    } 
 
 
 
@@ -76,4 +98,3 @@
     <a href="~/klant/index" class="btn"> klanten</a>
 </p>
 
-<img src="~/Content/bgimage.jpg" , height="100%" , width="100%" />

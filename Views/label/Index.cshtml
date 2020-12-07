@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectC.Models.labels>
+﻿@model IEnumerable<ProjectC.Models.label>
 
 @{ ViewBag.Title = "Labels";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
@@ -16,8 +16,11 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
-    {
+
+     @foreach (var item in Model)
+     {
+         using (Html.BeginForm("Verwijderen", "label", new { id = item.labelid }))
+         {
 <tr>
     <td>
         <a href="~/label/Edit/@item.labelid.ToString()" class="btn">inzien</a>
@@ -26,10 +29,11 @@
         @Html.DisplayFor(modelItem => item.labelname)
     </td>
     <td>
-        <a href="~/label/Delete/@item.labelid.ToString()" class="btn">verwijderen</a>
+        <input type="submit" value="Verwijderen" class="btn" />
     </td>
     <td></td>
 </tr>}
+     }
 
 
 
@@ -40,5 +44,3 @@
     <a href="~/ContactPerson/index" class="btn">Contactpersonen</a>
     <a href="~/klant/index" class="btn"> klanten</a>
 </p>
-
-<img src="~/Content/bgimage.jpg" , height="100%" , width="100%" />

@@ -415,16 +415,13 @@
     <Content Include="Views\medewerker\Edit.cshtml" />
     <Content Include="Views\medewerker\Index.cshtml" />
     <Content Include="Views\ContactPerson\Create.cshtml" />
-    <Content Include="Views\ContactPerson\Delete.cshtml" />
     <Content Include="Views\ContactPerson\Edit.cshtml" />
     <Content Include="Views\ContactPerson\Index.cshtml" />
     <Content Include="Views\label\Create.cshtml" />
-    <Content Include="Views\label\Delete.cshtml" />
     <Content Include="Views\label\Edit.cshtml" />
     <Content Include="Views\label\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\klant\Create.cshtml" />
-    <Content Include="Views\klant\Delete.cshtml" />
     <Content Include="Views\klant\Edit.cshtml" />
     <Content Include="Views\klant\Index.cshtml" />
     <Content Include="Views\Resultaten\Index.cshtml" />
