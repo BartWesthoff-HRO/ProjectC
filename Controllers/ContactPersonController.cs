@@ -21,20 +21,7 @@ namespace ProjectC.Controllers
             return View(db.ContactPersons.ToList());
         }
 
-        // GET: ContactPerson/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ContactPerson contactPerson = db.ContactPersons.Find(id);
-            if (contactPerson == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contactPerson);
-        }
+        
 
         // GET: ContactPerson/Create
         public ActionResult Create()
