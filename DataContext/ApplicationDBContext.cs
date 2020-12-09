@@ -9,7 +9,7 @@ namespace ProjectC.DataContext
 {
     public class ApplicationDBContext : DbContext
     {
-        public ApplicationDBContext() : base(nameOrConnectionString: "Myconnection")
+        public ApplicationDBContext() : base(nameOrConnectionString: "ProjectCadmin")
         {
             // dit is een test//
         }

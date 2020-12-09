@@ -9,7 +9,7 @@ using System.ComponentModel;
 namespace ProjectC.Models
 {
 
-        [Table("medewerker", Schema = "public")]
+        [Table("medewerker", Schema = "dbo")]
         public class Medewerker
         {
         [Key]

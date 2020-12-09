@@ -7,11 +7,12 @@ using System.Web;
 
 namespace ProjectC.Models
 {
-        [Table("label", Schema = "public")]
+        [Table("label", Schema = "dbo")]
         public class label
         {
             [Key]
             public int labelid { get; set; }
             public string labelname { get; set; }
+
         }
     }

@@ -8,7 +8,7 @@ using System.Web;
 namespace ProjectC.Models
 {
 
-    [Table("klant", Schema = "public")]
+    [Table("klant", Schema = "dbo")]
     public class klant
     {
         [Key]
