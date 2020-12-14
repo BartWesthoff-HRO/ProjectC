@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MailChimp.Net.Models.Campaign>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="~/styles/tijmenstyle.css?version=1" />
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 @{
     ViewBag.Title = "Saved";
@@ -13,15 +13,13 @@
 
 
 <table class="table">
-
     <tr>
         <th>
-            List name:
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
+                <button class="btn" type="button" data-toggle="dropdown">
+                    kies lijst
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
@@ -52,3 +50,12 @@
     <a href="~/Campaings/Drafts" class="btn"> Drafts</a>
 </p>
 
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".dropdown-toggle").dropdown();
+    });
+</script>
