@@ -21,9 +21,9 @@
                     kies lijst
                 </button>
                 <div class="dropdown-menu">
-                    @foreach (var list in ViewBag.Teachers)
+                    @foreach (var list in ViewBag.Lists)
                     {
-                        <a class="dropdown-item" @Html.ActionLink($"{list.Id}", "Sent", "Campaings", new { id = list.Id }, null)></a>
+                        <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Sent", "Campaings", new { id = list.Id }, null)></a>
                     }
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <td>@campaign.Settings.Title</td>
             <td>@campaign.EmailsSent</td>
             <td> @campaign.CreateTime</td>
-            <td> <a class="btn" @Html.ActionLink("Versturen", "Send", "Campaings", new { id = campaign.Id }, null)></a></td>
+            <td> <a class="btn" @Html.ActionLink("Duplicate", "Duplicate", "Campaings", null, null)></a></td>
         </tr>
     }
 

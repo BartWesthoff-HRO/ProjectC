@@ -22,8 +22,7 @@ namespace ProjectC.Controllers
             {
                 //ListId = "14d2abf97d",
                 Status = CampaignStatus.Save,
-                SortOrder = CampaignSortOrder.DESC,
-                
+                SortOrder = CampaignSortOrder.DESC,             
                 Limit = 10
             };
             ViewBag.ListId = "14d2abf97d";
@@ -35,11 +34,15 @@ namespace ProjectC.Controllers
 
         }
 
+        public async Task<ActionResult> Duplicate()
+        {
+            await Manager.Campaigns.ReplicateCampaignAsync("b1dfc83cb9");
+            return View("Drafts");
+        }
         public async Task<ActionResult> Send(string id)
         {
-
             await Manager.Campaigns.SendAsync(id);
-            return RedirectToAction("index");
+            return RedirectToAction("Drafts");
         }
 
         public async Task<ActionResult> Sent(string id = "b8ddf89ff8")
@@ -51,7 +54,7 @@ namespace ProjectC.Controllers
                 SortOrder = CampaignSortOrder.DESC,
                 Limit = 10
             };
-            ViewBag.Teachers = await Manager.Lists.GetAllAsync();
+            ViewBag.Lists = await Manager.Lists.GetAllAsync();
 
             //14d2abf97d
             var model = await Manager.Campaigns.GetAllAsync(options);
