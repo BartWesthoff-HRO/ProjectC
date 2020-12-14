@@ -4,24 +4,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.title</title>
     <link href="~/styles/tijmenstyle.css?version=1" rel="stylesheet" />
+
 </head>
 <body>
-  
+
 
     <nav class="navbar navbar-expand-lg ">
         <a class="navbar-brand" href="https://www.renvl.nl/" target="_blank">  <img src="~/Content/logo.png" alt=""></a>
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" @Html.ActionLink("Home", "Index", "Home", null, null)</a>
-            <a class="nav-item nav-link active" @Html.ActionLink("Email", "Index", "Email", null, null)</a>
-            <a class="nav-item nav-link active" @Html.ActionLink("Restultaten", "Index", "Resultaten", null, null)</a>
-            <a class="nav-item nav-link active" @Html.ActionLink("ContactPersonen", "Index", "ContactPerson", null, null)</a>
-            <a class="nav-item nav-link active" @Html.ActionLink("Klanten", "Index", "klant", null, null)</a>
+            <a class="nav-item nav-link active" href="~/Home"> home </a>
+            <a class="nav-item nav-link active" href="~/Campaings/Drafts"> Campaings</a>
+            <a class="nav-item nav-link active" href="~/resultaten"> resultaten</a>
+            <a class="nav-item nav-link active" href="~/contactperson"> contactpersonen </a>
+            <a class="nav-item nav-link active" href="~/klant/index"> klanten</a>
         </div>
     </nav>
-    
-    @RenderBody()
-    
 
+    @RenderBody()
+
+    <script src="~/Scripts/umd/popper.min.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

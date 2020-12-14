@@ -40,8 +40,9 @@
                             </div>
 
                             <div class="col-lg-6">
-                                <label>Labels:</label>
-                                <input type="text" name="username" class="form-control">
+                                <label>persoonid:</label>
+                                @Html.EditorFor(model => model.persoonid, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.persoonid, "", new { @class = "text-danger" })
                             </div>
                         </div>
 

@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
 
 
@@ -14,40 +15,39 @@
         </div>
         @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
         {
-<table>
-    <tr>
-        <td></td>
+            <table>
+                <tr>
+                    <td></td>
 
-    </tr>
-    <tr>
-        <div class="field">
-            <input type="text" required, id="gebruikersnaam" , name="Gebruikersnaam">
-            <label>Email Address</label>
-        </div>
+                </tr>
+                <tr>
+                    <div class="field">
+                        <input type="text" required, id="gebruikersnaam" , name="Gebruikersnaam">
+                        <label>Email Address</label>
+                    </div>
 
-    </tr>
-    <tr>
-        <td></td>
-
-        <td>@Html.ValidationMessageFor(model => model.gebruikersnaam)</td>
-    </tr>
-    <tr>
-        <div class="field">
-            <input type="password" required, id="wachtwoord" , name="Wachtwoord">
-            <label>Password</label>
-        </div>
-    </tr>
-    <tr>
-        <td></td>
-        <td>@Html.ValidationMessageFor(model => model.wachtwoord)</td>
-    </tr>
-    <tr>
-        <td></td>
-        <div class="field">
-            <input type="submit" value="Login">
-        </div>
-    </tr>
-</table>}
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.gebruikersnaam)</td>
+                </tr>
+                <tr>
+                    <div class="field">
+                        <input type="password" required, id="wachtwoord" , name="Wachtwoord">
+                        <label>Password</label>
+                    </div>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.wachtwoord)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <div class="field">
+                        <input type="submit" value="Login">
+                    </div>
+                </tr>
+            </table>}
 
     </div>
 </body>

@@ -6,13 +6,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MailChimp.Net.Models;
 using ProjectC.DataContext;
 using ProjectC.Models;
+using System.Threading.Tasks;
+using MailChimp.Net;
 
 namespace ProjectC.Controllers
 {
     public class ContactPersonController : Controller
     {
+        private static MailChimpManager Manager = new MailChimpManager("e8453349ccde9693bf86d9760787356f-us7");
         private ApplicationDBContext db = new ApplicationDBContext();
 
         // GET: ContactPerson
@@ -34,16 +38,37 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
+        public async Task<ActionResult> Create([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
         {
             if (ModelState.IsValid)
             {
-                db.ContactPersons.Add(contactPerson);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                //db.ContactPersons.Add(contactPerson);
+                //db.SaveChanges();
+                Dictionary<string, object> dictionaries = new Dictionary<string, object>
+                {
+                    { "FNAME", "Foo" },
+                    { "LNAME", "Bar" }
+                };
+                var member = new Member
+                {
+                    EmailAddress = contactPerson.email,
+                    Status = Status.Pending,
+                    EmailType = "html",
+                    TimestampSignup = DateTime.UtcNow.ToString(),
+                    MergeFields = dictionaries,
+                };
 
-            return View(contactPerson);
+
+                var result = await Manager.Members.AddOrUpdateAsync("14d2abf97d", member);
+                return View("Index");
+
+            }
+            else
+                return View("Index");
+
+
+           
+            
         }
 
         // GET: ContactPerson/Edit/5
@@ -75,12 +100,31 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
+        public async Task<ActionResult> Edit([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(contactPerson).State = EntityState.Modified;
                 db.SaveChanges();
+                Dictionary<string, object> dictionaries = new Dictionary<string, object>
+                {
+                    { "FNAME", "Foo" },
+                    { "LNAME", "Bar" }
+                };
+                var member = new Member
+                {
+                    EmailAddress = contactPerson.email,
+                    Status = Status.Subscribed,
+                    EmailType = "html",
+                    //TimestampSignup = "12/10/20 4:28PM",
+                    
+                    MergeFields = dictionaries,
+                };
+
+                Tags tags = new Tags();
+                tags.MemberTags.Add(new Tag() { Name = "Customer", Status = "inactive" });
+                await Manager.Members.AddTagsAsync("14d2abf97d", contactPerson.email, tags);
+                var result = await Manager.Members.AddOrUpdateAsync("14d2abf97d", member);
                 return RedirectToAction("Index");
             }
             return View(contactPerson);

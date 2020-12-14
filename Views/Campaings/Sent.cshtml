@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MailChimp.Net.Models.Campaign>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+@{
+    ViewBag.Title = "Saved";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+<table class="table">
+
+    <tr>
+        <th>
+            List name:
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Aantal ontvangers</th>
+        <th>createtime</th>
+        <th>versturen</th>
+    </tr>
+
+    @foreach (var campaign in Model)
+    {
+        <tr>
+            <td><a href="@campaign.ArchiveUrl" target="_blank" class="btn"> inzien</a></td>
+            <td>@campaign.Id</td>
+            <td>@campaign.Settings.Title</td>
+            <td>@campaign.EmailsSent</td>
+            <td> @campaign.CreateTime</td>
+            <td> <a class="btn" @Html.ActionLink("Versturen", "Send", "Campaings", new { id = campaign.Id }, null)></a></td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    <a href="~/Campaings/Drafts" class="btn"> Drafts</a>
+</p>
+

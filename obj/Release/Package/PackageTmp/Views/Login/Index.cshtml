@@ -1,0 +1,55 @@
+﻿@model ProjectC.Models.Medewerker
+
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+
+<body>
+    <div class="wrapper">
+        <div class="title">
+            Ranshuijsen BV
+        </div>
+        @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+        {
+<table>
+    <tr>
+        <td></td>
+
+    </tr>
+    <tr>
+        <div class="field">
+            <input type="text" required, id="gebruikersnaam" , name="Gebruikersnaam">
+            <label>Email Address</label>
+        </div>
+
+    </tr>
+    <tr>
+        <td></td>
+
+        <td>@Html.ValidationMessageFor(model => model.gebruikersnaam)</td>
+    </tr>
+    <tr>
+        <div class="field">
+            <input type="password" required, id="wachtwoord" , name="Wachtwoord">
+            <label>Password</label>
+        </div>
+    </tr>
+    <tr>
+        <td></td>
+        <td>@Html.ValidationMessageFor(model => model.wachtwoord)</td>
+    </tr>
+    <tr>
+        <td></td>
+        <div class="field">
+            <input type="submit" value="Login">
+        </div>
+    </tr>
+</table>}
+
+    </div>
+</body>
+
+
