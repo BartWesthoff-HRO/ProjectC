@@ -67,7 +67,6 @@ body {
     font-weight: 400;
     line-height: 1.5;
     text-align: left;
- 
     background-image: url(../Content/bgimage.jpg);
     background-size: 100% 100%;
 }
@@ -154,7 +153,7 @@ sub {
 sup {
     top: -.5em
 }
-/*
+
 a {
     color: #007bff;
     text-decoration: none;
@@ -179,7 +178,7 @@ a {
 
         a:not([href]):not([tabindex]):focus {
             outline: 0
-        }*/
+        }
 
 code, kbd, pre, samp {
     font-family: monospace,monospace;
@@ -1799,17 +1798,16 @@ pre {
         padding: .75rem;
         vertical-align: top;
         border-bottom: 1px solid grey;
-   
     }
-    .table th{
+
+    .table th {
         background-color: orange;
     }
     /* test voor selecting rows*/
     .table tr:not(thead):hover {
         background-color: whitesmoke;
-
-            
     }
+
     .table tr:not(head) {
         background-color: #FEF4EB;
     }
@@ -2496,7 +2494,6 @@ select.form-control:focus::-ms-value {
         box-shadow: black;
         color: black;
         background-color: orange;
-
     }
 
     .btn.focus, .btn:focus {
@@ -3629,6 +3626,7 @@ tbody.collapse.show {
 
 
 
+
 .nav-link:focus, .nav-link:hover {
     text-decoration: none;
     background-color: orange;
@@ -3701,11 +3699,10 @@ tbody.collapse.show {
         color: black;
     }
 
-   /* .navbar-nav ..nav-tabs.nav-justified  > .dropdown .dropdown-menu {
-
+    .navbar-nav .dropdown-menu {
         position: static;
         float: none
-    }*/
+    }
 
 .navbar-text {
     display: inline-block;
@@ -3776,14 +3773,14 @@ tbody.collapse.show {
             flex-direction: row
         }
 
-         /*   .navbar-expand-sm .navbar-nav .dropdown-menu {
+            .navbar-expand-sm .navbar-nav .dropdown-menu {
                 position: absolute
             }
 
             .navbar-expand-sm .navbar-nav .dropdown-menu-right {
                 right: 0;
                 left: auto
-            }*/
+            }
 
             .navbar-expand-sm .navbar-nav .nav-link {
                 padding-right: .5rem;
@@ -3838,11 +3835,11 @@ tbody.collapse.show {
             flex-direction: row
         }
 
-            .navbar-expand-md .navbar-nav  {
+            .navbar-expand-md .navbar-nav .dropdown-menu {
                 position: absolute
             }
 
-            .navbar-expand-md .navbar-nav {
+            .navbar-expand-md .navbar-nav .dropdown-menu-right {
                 right: 0;
                 left: auto
             }
@@ -3869,7 +3866,7 @@ tbody.collapse.show {
             display: none
         }
 
-        .navbar-expand-md {
+        .navbar-expand-md .dropup .dropdown-menu {
             top: auto;
             bottom: 100%
         }
@@ -3900,11 +3897,11 @@ tbody.collapse.show {
             flex-direction: row
         }
 
-            .navbar-expand-lg .navbar-nav {
+            .navbar-expand-lg .navbar-nav .dropdown-menu {
                 position: absolute
             }
 
-            .navbar-expand-lg .navbar-nav {
+            .navbar-expand-lg .navbar-nav .dropdown-menu-right {
                 right: 0;
                 left: auto
             }
@@ -3931,7 +3928,7 @@ tbody.collapse.show {
             display: none
         }
 
-        .navbar-expand-lg .dropup {
+        .navbar-expand-lg .dropup .dropdown-menu {
             top: auto;
             bottom: 100%
         }
@@ -3962,11 +3959,11 @@ tbody.collapse.show {
             flex-direction: row
         }
 
-            .navbar-expand-xl .navbar-nav  {
+            .navbar-expand-xl .navbar-nav .dropdown-menu {
                 position: absolute
             }
 
-            .navbar-expand-xl .navbar-nav  {
+            .navbar-expand-xl .navbar-nav .dropdown-menu-right {
                 right: 0;
                 left: auto
             }
@@ -3993,7 +3990,7 @@ tbody.collapse.show {
             display: none
         }
 
-        .navbar-expand-xl  {
+        .navbar-expand-xl .dropup .dropdown-menu {
             top: auto;
             bottom: 100%
         }
@@ -4021,11 +4018,11 @@ tbody.collapse.show {
         flex-direction: row
     }
 
-        .navbar-expand .navbar-nav  {
+        .navbar-expand .navbar-nav .dropdown-menu {
             position: absolute
         }
 
-        .navbar-expand .navbar-nav  {
+        .navbar-expand .navbar-nav .dropdown-menu-right {
             right: 0;
             left: auto
         }
@@ -4052,7 +4049,7 @@ tbody.collapse.show {
         display: none
     }
 
-    .navbar-expand {
+    .navbar-expand .dropup .dropdown-menu {
         top: auto;
         bottom: 100%
     }
@@ -4682,7 +4679,6 @@ tbody.collapse.show {
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: .25rem
-    
 }
 
 .alert-heading {
