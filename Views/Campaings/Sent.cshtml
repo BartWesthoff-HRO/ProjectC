@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<MailChimp.Net.Models.Campaign>
 
-
-<link rel="stylesheet" type="text/css" href="~/styles/tijmenstyle.css?version=1" />
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 @{
     ViewBag.Title = "Saved";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
-
+<style>    
+    .open > .dropdown-menu {
+        display: block
+    }
+</style>
 
 
 <table class="table">
@@ -20,9 +21,10 @@
                     kies lijst
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    @foreach (var list in ViewBag.Teachers)
+                    {
+                        <a class="dropdown-item" @Html.ActionLink($"{list.Id}", "Sent", "Campaings", new { id = list.Id }, null)></a>
+                    }
                 </div>
             </div>
         <th>ID</th>
