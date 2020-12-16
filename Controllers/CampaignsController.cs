@@ -1,5 +1,6 @@
 ﻿using MailChimp.Net;
 using MailChimp.Net.Core;
+using MailChimp.Net.Models;
 using ProjectC.Models;
 using System;
 using System.Collections.Generic;
@@ -56,10 +57,18 @@ namespace ProjectC.Controllers
             };
             ViewBag.Lists = await Manager.Lists.GetAllAsync();
 
+            ViewBag.Clicks = GetOpens(id).Result;
             //14d2abf97d
             var model = await Manager.Campaigns.GetAllAsync(options);
+
             return View(model);
 
+        }
+
+        private async Task<int> GetOpens(string id)
+        {
+            var opens = await Manager.Reports.GetUnsubscribesCountAsync(id);
+            return opens;
         }
     }
 }

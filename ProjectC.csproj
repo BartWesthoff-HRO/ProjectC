@@ -368,6 +368,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\medewerkerController.cs" />
     <Compile Include="Controllers\ResultatenController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="DataContext\ApplicationDBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -524,6 +525,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Survey\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

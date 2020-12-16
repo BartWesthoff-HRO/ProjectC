@@ -6,12 +6,54 @@
 
 }
 
-<style>    
+<style>
     .open > .dropdown-menu {
         display: block
     }
-</style>
 
+    
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+
+    }
+
+</style>
 
 <table class="table">
     <tr>
@@ -20,7 +62,7 @@
                 <button class="btn" type="button" data-toggle="dropdown">
                     kies lijst
                 </button>
-                <div class="dropdown-menu">
+                <div class="dropdown-content">
                     @foreach (var list in ViewBag.Lists)
                     {
                         <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Sent", "Campaings", new { id = list.Id }, null)></a>
@@ -31,19 +73,25 @@
         <th>Title</th>
         <th>Aantal ontvangers</th>
         <th>createtime</th>
+        <th>lijst van de naam</th>
         <th>versturen</th>
     </tr>
 
     @foreach (var campaign in Model)
     {
-        <tr>
-            <td><a href="@campaign.ArchiveUrl" target="_blank" class="btn"> inzien</a></td>
-            <td>@campaign.Id</td>
-            <td>@campaign.Settings.Title</td>
-            <td>@campaign.EmailsSent</td>
-            <td> @campaign.CreateTime</td>
-            <td> <a class="btn" @Html.ActionLink("Duplicate", "Duplicate", "Campaings", null, null)></a></td>
-        </tr>
+<tr>
+    <td><a href="@campaign.ArchiveUrl" target="_blank" class="btn"> inzien</a></td>
+    <td>@campaign.Id</td>
+    <td>@campaign.Settings.Title</td>
+    <td>@campaign.EmailsSent</td>
+    <td> @campaign</td>
+    <td> @campaign.Recipients.ListName </td>
+    <td>
+        @ViewBag.Clicks
+
+    </td>
+        <td> <a class="btn" @Html.ActionLink("Send", "Send", "Campaings", null, null)></a></td>
+    </tr>
     }
 
 </table>
@@ -56,8 +104,8 @@
 
 
 
-<script>
-    $(document).ready(function () {
-        $(".dropdown-toggle").dropdown();
-    });
-</script>
+@*<script>
+        $(document).ready(function () {
+            $(".dropdown-toggle").dropdown();
+        });
+    </script>*@
