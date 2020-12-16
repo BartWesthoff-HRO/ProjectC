@@ -17,7 +17,7 @@ namespace ProjectC.Models
         //api manager
         private MailChimpManager McM = new MailChimpManager(key);
 
-        public async Task<MailChimp.Net.Models.Campaign> draftAsync(int limit=10)
+        public async Task<IEnumerable<MailChimp.Net.Models.Campaign>> draftAsync(int limit)
         {
             var options = new CampaignRequest
             {
@@ -26,10 +26,15 @@ namespace ProjectC.Models
                 Limit = limit
             };
 
-            return (await McM.Campaigns.GetAllAsync(options)).FirstOrDefault();
+            return await McM.Campaigns.GetAllAsync(options);
         }
 
-        public async Task<MailChimp.Net.Models.Campaign> sentAsync(string id = "b8ddf89ff8", int limit = 10)
+        public async void sendAsync(string id)
+        {
+            await McM.Campaigns.SendAsync(id);
+        }
+
+        public async Task<IEnumerable<MailChimp.Net.Models.Campaign>> send(string id, int limit)
         {
             var options = new CampaignRequest
             {
@@ -39,7 +44,7 @@ namespace ProjectC.Models
                 Limit = limit
             };
 
-            return (await McM.Campaigns.GetAllAsync(options)).FirstOrDefault();
+            return await McM.Campaigns.GetAllAsync(options);
         }
 
     }
