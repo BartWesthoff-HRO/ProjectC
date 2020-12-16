@@ -372,6 +372,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\API.cs" />
     <Compile Include="Models\ContactPerson.cs" />
     <Compile Include="Models\klant.cs" />
     <Compile Include="Models\Label.cs" />
