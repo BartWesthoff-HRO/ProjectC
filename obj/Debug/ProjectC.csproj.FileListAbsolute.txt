@@ -288,7 +288,6 @@ C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\bin\System.Web.WebPages.De
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\bin\System.Web.WebPages.Razor.xml
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\bin\Antlr3.Runtime.pdb
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.csprojAssemblyReference.cache
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.csproj.CoreCompileInputs.cache
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.csproj.CopyComplete
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.dll

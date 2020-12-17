@@ -63,10 +63,10 @@
                     kies lijst
                 </button>
                 <div class="dropdown-content">
-                    @foreach (var list in ViewBag.Lists)
+                    @*@foreach (var list in ViewBag.Lists)
                     {
                         <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Sent", "Campaings", new { id = list.Id }, null)></a>
-                    }
+                    }*@
                 </div>
             </div>
         <th>ID</th>
@@ -86,10 +86,10 @@
     <td>@campaign.EmailsSent</td>
     <td> @campaign</td>
     <td> @campaign.Recipients.ListName </td>
-    <td>
+    @*<td>
         @ViewBag.Clicks
 
-    </td>
+    </td>*@
         <td> <a class="btn" @Html.ActionLink("Send", "Send", "Campaings", null, null)></a></td>
     </tr>
     }

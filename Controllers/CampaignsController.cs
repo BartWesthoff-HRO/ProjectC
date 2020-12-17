@@ -23,7 +23,7 @@ namespace ProjectC.Controllers
             {
                 //ListId = "14d2abf97d",
                 Status = CampaignStatus.Save,
-                SortOrder = CampaignSortOrder.DESC,             
+                SortOrder = CampaignSortOrder.DESC,
                 Limit = 10
             };
             ViewBag.ListId = "14d2abf97d";
@@ -57,7 +57,7 @@ namespace ProjectC.Controllers
             };
             ViewBag.Lists = await Manager.Lists.GetAllAsync();
 
-            ViewBag.Clicks = GetOpens(id).Result;
+            //ViewBag.Clicks = GetOpens(id).Result;
             //14d2abf97d
             var model = await Manager.Campaigns.GetAllAsync(options);
 
@@ -69,6 +69,48 @@ namespace ProjectC.Controllers
         {
             var opens = await Manager.Reports.GetUnsubscribesCountAsync(id);
             return opens;
+        }
+
+        public async Task<ActionResult> Create()
+        {
+            string listID = "b8ddf89ff8";
+            int segmentID = 0;
+            var segmentAwaitable = Manager.ListSegments.GetAllAsync(listID).ConfigureAwait(false);
+            var segment = segmentAwaitable.GetAwaiter().GetResult();
+            foreach (var seg in segment)
+            {
+                string segmentNameTmp = seg.Name;
+                int segmentIdTmp = seg.Id;
+                if (segmentNameTmp.Equals("bigB"))
+                {
+                    segmentID = (segmentIdTmp);
+                }
+            }
+
+            var sending = new Campaign
+            {
+                Id = "newid",
+                Settings = new Setting
+                {
+                    AutoFooter = false,
+                    FromName = "0991807@hr.nl",
+                    Title = "new title",
+                },
+                Recipients = new Recipient
+                {
+                    ListId = listID,
+                    SegmentOptions = new SegmentOptions
+                    {
+                        SavedSegmentId = segmentID,
+                        
+                    }
+                },
+                Type = CampaignType.Regular
+            };
+            await Manager.Campaigns.AddAsync(sending);
+            return RedirectToAction("Sent");
+
+
         }
     }
 }
