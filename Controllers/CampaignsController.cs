@@ -48,26 +48,62 @@ namespace ProjectC.Controllers
 
         public async Task<ActionResult> Sent(string id = "b8ddf89ff8")
         {
+
             var options = new CampaignRequest
             {
                 ListId = id,
                 Status = CampaignStatus.Sent,
                 SortOrder = CampaignSortOrder.DESC,
-                Limit = 10
+                Limit = 10,         
             };
+            //ViewBag.Lists = await Manager.Lists.GetAllAsync();
+
+            //ViewBag.Clicks = GetOpens().Result;
+            //14d2abf97d
+            //var model = await Manager.Campaigns.GetAllAsync(options);
+
+            //return View(model);
+
+
+            var sortedList = await Manager.Campaigns.GetAllAsync(options);
+            Audience audience = new Audience();
+            var newCampaignList = new List<CCampaign>();
+            foreach (var Campaign in sortedList)
+            {
+                var newCampaign = new CCampaign();
+                newCampaign.CampaignName = Campaign.Settings.Title;
+                //newCampaign.ClickRate = Clicks(Campaign.Id).Result;
+                newCampaign.OpenRate = await Manager.Reports.GetCampaignOpenReportCountAsync(Campaign.Id); 
+                newCampaign.Id = Campaign.Id;
+                //newCampaign.UnsubRate = await Manager.Reports.GetUnsubscribesCountAsync(id);
+                newCampaign.ListName = Campaign.Recipients.ListName;
+                newCampaign.URL = Campaign.ArchiveUrl;
+                newCampaign.EmailsSent = Campaign.EmailsSent;
+
+                newCampaignList.Add(newCampaign);
+            }
+
+            audience.CampaignList = newCampaignList;
             ViewBag.Lists = await Manager.Lists.GetAllAsync();
 
-            //ViewBag.Clicks = GetOpens(id).Result;
-            //14d2abf97d
-            var model = await Manager.Campaigns.GetAllAsync(options);
 
-            return View(model);
-
+            return View(audience);
         }
-
-        private async Task<int> GetOpens(string id)
+        private async Task<int> Unsub(string id = "47f42ba6ac")
         {
             var opens = await Manager.Reports.GetUnsubscribesCountAsync(id);
+            return opens;
+        }
+
+        private async Task<int> Clicks(string id = "47f42ba6ac")
+        {
+            var opens = await Manager.Reports.GetClickReportAsync(id);
+            return opens.Count();
+        }
+
+        private async Task<int> GetOpens(string id = "47f42ba6ac")
+        {
+            var opens = await Manager.Reports.GetCampaignOpenReportCountAsync(id);
             return opens;
         }
 

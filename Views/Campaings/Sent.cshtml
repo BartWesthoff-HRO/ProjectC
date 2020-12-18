@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MailChimp.Net.Models.Campaign>
+﻿@model ProjectC.Models.Audience
 
 @{
     ViewBag.Title = "Saved";
@@ -63,10 +63,10 @@
                     kies lijst
                 </button>
                 <div class="dropdown-content">
-                    @*@foreach (var list in ViewBag.Lists)
+                    @foreach (var list in ViewBag.Lists)
                     {
                         <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Sent", "Campaings", new { id = list.Id }, null)></a>
-                    }*@
+                    }
                 </div>
             </div>
         <th>ID</th>
@@ -77,21 +77,29 @@
         <th>versturen</th>
     </tr>
 
-    @foreach (var campaign in Model)
+    @foreach(var campaign in Model.CampaignList)
     {
 <tr>
-    <td><a href="@campaign.ArchiveUrl" target="_blank" class="btn"> inzien</a></td>
+    <td><a href="@campaign.URL" target="_blank" class="btn"> inzien</a></td>
     <td>@campaign.Id</td>
-    <td>@campaign.Settings.Title</td>
-    <td>@campaign.EmailsSent</td>
-    <td> @campaign</td>
-    <td> @campaign.Recipients.ListName </td>
-    @*<td>
-        @ViewBag.Clicks
+    <td>@campaign.CampaignName</td>
 
-    </td>*@
-        <td> <a class="btn" @Html.ActionLink("Send", "Send", "Campaings", null, null)></a></td>
-    </tr>
+    @*<td>@campaign.DateCreated</td>*@
+    <td> @campaign.EmailsSent</td>
+    <td>@campaign.ListName</td>
+    @*<td>@campaign.Settings.Title</td>
+        <td>@campaign.EmailsSent</td>
+        <td> @campaign</td>
+        <td> @campaign.Recipients.ListName </td>*@
+    <td> @campaign.OpenRate </td>
+    @*<td> @campaign.UnsubRate </td>*@
+
+    @*<td>@campaign.CampaignName</td>
+        <td>@campaign.OpenRate</td>*@
+    <td>
+    </td>
+    <td> <a class="btn" @Html.ActionLink("Send", "Send", "Campaings", null, null)></a></td>
+</tr>
     }
 
 </table>
