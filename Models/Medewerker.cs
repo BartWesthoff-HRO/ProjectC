@@ -13,12 +13,12 @@ namespace ProjectC.Models
         public class Medewerker
         {
         [Key]
-        public int medewerkerid { get; set; }
-            [DisplayName("User Name")]
-            [Required(ErrorMessage = "Je moet een naam invullen")]
-            public string gebruikersnaam { get; set; }
-            [DataType(DataType.Password)]
-            [Required(ErrorMessage = "Je moet een wachtwoord invullen")]
-            public string wachtwoord { get; set; }
+        public int medewerkerid { get;}
+        [DisplayName("User Name")]
+        [Required(ErrorMessage = "Vul een gebruikersnaam in")]
+        public string gebruikersnaam { get; set; }
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Vul je wachtwoord in")]
+        public string wachtwoord { get; set; }
         }
 }

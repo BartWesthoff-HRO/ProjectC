@@ -25,8 +25,14 @@ namespace ProjectC.Models
                 SortOrder = CampaignSortOrder.DESC,
                 Limit = limit
             };
+            //ViewBag.ListId = "14d2abf97d";
 
             return await McM.Campaigns.GetAllAsync(options);
+        }
+
+        public async Task<IEnumerable<MailChimp.Net.Models.List>> getAllAsync()
+        {
+            return await McM.Lists.GetAllAsync();
         }
 
         public async void sendAsync(string id)
@@ -34,7 +40,7 @@ namespace ProjectC.Models
             await McM.Campaigns.SendAsync(id);
         }
 
-        public async Task<IEnumerable<MailChimp.Net.Models.Campaign>> send(string id, int limit)
+        public async Task<IEnumerable<MailChimp.Net.Models.Campaign>> sendAsync(string id, int limit)
         {
             var options = new CampaignRequest
             {
@@ -43,8 +49,9 @@ namespace ProjectC.Models
                 SortOrder = CampaignSortOrder.DESC,
                 Limit = limit
             };
+            //ViewBag.Lists = await McM.Lists.GetAllAsync();
 
-            return await McM.Campaigns.GetAllAsync(options);
+            return (await McM.Lists.GetAllAsync(), (await McM.Campaigns.GetAllAsync(options));
         }
 
     }

@@ -17,19 +17,23 @@ namespace ProjectC.Controllers
 
         public async Task<ActionResult> Drafts(int limit = 10)
         {
+            //first element list (moet nog komen)
+            //ViewBag.ListId = "14d2abf97d";
             return View(await mails.draftAsync(limit));
 
         }
 
         public async Task<ActionResult> Send(string id)
-        {
+        { 
             mails.sendAsync(id);
             return RedirectToAction("index");
         }
 
         public async Task<ActionResult> Sent(string id = "b8ddf89ff8", int limit = 10)
         {
-            return View(await mails.send(id, limit));
+            //ViewBag.Lists = mails.getAllAsync();
+            ViewBag.Teachers , var model = await mails.sendAsync(id, limit);
+            return model;
 
         }
     }

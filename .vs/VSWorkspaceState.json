@@ -1,9 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Controllers",
+    "\\Models",
     "\\Views",
+    "\\Views\\Campaings",
     "\\Views\\Home"
   ],
-  "SelectedNode": "\\ProjectC.sln",
+  "SelectedNode": "\\Controllers\\CampaignsController.cs",
   "PreviewInSolutionExplorer": false
 }
