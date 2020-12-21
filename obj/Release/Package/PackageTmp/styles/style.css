@@ -1,4 +1,4 @@
-﻿/*@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 * {
     margin: 0;
@@ -14,7 +14,7 @@ html, body {
     place-items: center;
     
 
-}*/
+}
 
 ::selection {
     background: #4158d0;
@@ -116,9 +116,7 @@ form .content {
         padding-left: 5px;
     }
 
-    form .content .pass-link {
-        color: "";
-    }
+    
 
 form .field input[type="submit"] {
     color: #fff;

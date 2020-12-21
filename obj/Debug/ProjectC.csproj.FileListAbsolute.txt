@@ -292,4 +292,3 @@ C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.csproj.
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.csproj.CopyComplete
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.dll
 C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.pdb
-C:\Users\bartw\source\repos\BartWesthoff-HRO\ProjectC\obj\Debug\ProjectC.csprojAssemblyReference.cache

@@ -16,7 +16,7 @@ namespace ProjectC.Controllers
 {
     public class ContactPersonController : Controller
     {
-        private static MailChimpManager Manager = new MailChimpManager("e8453349ccde9693bf86d9760787356f-us7");
+        private static MailChimpManager Manager = new MailChimpManager("c21b2291eb1b26c7ea4b1a86908dcc78-us2");
         private ApplicationDBContext db = new ApplicationDBContext();
 
         // GET: ContactPerson
@@ -42,33 +42,32 @@ namespace ProjectC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.ContactPersons.Add(contactPerson);
-                //db.SaveChanges();
-                Dictionary<string, object> dictionaries = new Dictionary<string, object>
-                {
-                    { "FNAME", "Foo" },
-                    { "LNAME", "Bar" }
-                };
+                db.ContactPersons.Add(contactPerson);
+                db.SaveChanges();
+
                 var member = new Member
                 {
                     EmailAddress = contactPerson.email,
-                    Status = Status.Pending,
+                    Status = Status.Subscribed,
                     EmailType = "html",
-                    TimestampSignup = DateTime.UtcNow.ToString(),
-                    MergeFields = dictionaries,
+                    MergeFields = new Dictionary<string, object>
+                {
+                    { "FNAME", "hallo" },
+                    { "LNAME", "hillo" }
+                }
                 };
 
 
-                var result = await Manager.Members.AddOrUpdateAsync("14d2abf97d", member);
-                return View("Index");
+                var restult = await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
+                return RedirectToAction("Index");
 
             }
             else
-                return View("Index");
+                return RedirectToAction("Index");
 
 
-           
-            
+
+
         }
 
         // GET: ContactPerson/Edit/5
@@ -121,10 +120,10 @@ namespace ProjectC.Controllers
                     MergeFields = dictionaries,
                 };
 
-                Tags tags = new Tags();
-                tags.MemberTags.Add(new Tag() { Name = "Customer", Status = "inactive" });
-                await Manager.Members.AddTagsAsync("14d2abf97d", contactPerson.email, tags);
-                var result = await Manager.Members.AddOrUpdateAsync("14d2abf97d", member);
+                //Tags tags = new Tags();
+                //tags.MemberTags.Add(new Tag() { Name = "Customer", Status = "active" });
+                //await Manager.Members.AddTagsAsync("b8ddf89ff8", contactPerson.email, tags);
+                var result = await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
                 return RedirectToAction("Index");
             }
             return View(contactPerson);

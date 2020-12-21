@@ -1,45 +1,5 @@
 ﻿@model IEnumerable<ProjectC.Models.klant>
 
-
-
-@*<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Lastname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bedrijfsnaam)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bedrijfsnaam)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Firstname }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Firstname }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Firstname })
-            </td>
-        </tr>
-    }
-
-</table>*@
-
-
-
-
 @{ ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
@@ -95,22 +55,10 @@
                     <input type="submit" value="Verwijderen" class="btn"/>
                 </td>
                 <td></td>
-
-
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.personid }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.personid }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.personid })
-                    </td>*@
             </tr>
         }
     }
-
-
-
-
     </table>
-
     <p>
         <a href="~/klant/create" class="btn"> Klant toevoegen</a>
         <a href="~/label/index" class="btn"> Labels</a>

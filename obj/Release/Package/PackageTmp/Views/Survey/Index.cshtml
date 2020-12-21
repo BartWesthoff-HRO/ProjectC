@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .checkbox_group input {
+        background-color: #4CAF50; /* Green background */
+        border: 1px solid green; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        /* Set a width if needed */
+        display: block; /* Make the buttons appear below each other */
+        position: relative;
+        left: 550px;
+        top: 100px;
+    }
+
+    input[type='checkbox'] {
+        width: 30px;
+        height: 30px;
+        background: white;
+        border-radius: 5px;
+        border: 2px solid #555;
+    }
+
+        input[type='checkbox']:checked {
+            background: #abd;
+        }
+
+
+
+
+
+    .radio_group input {
+        background-color: #4CAF50; /* Green background */
+        border: 1px solid green; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        width: 150px; /* Set a width if needed */
+        display: block; /* Make the buttons appear below each other */
+        position: relative;
+        left: 550px;
+        top: 130px;
+    }
+
+    input[type= 'radio'] {
+        width: 30px;
+        height: 30px;
+        background: white;
+        border-radius: 5px;
+        border: 2px solid #555;
+    }
+
+        input[type='radio']:checked {
+            background: #abd;
+        }
+
+    [type=radio]:after {
+        content: attr(value);
+        float: right;
+        color: black;
+    }
+
+    button {
+        background-color: orange;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+    }
+
+        button:hover {
+            background-color: orange;
+            color: white;
+        }
+
+    canvas {
+        height: 200%;
+        width: 55%;
+        position: absolute;
+        left: 400px;
+        top: 100px;
+        border: 1px solid black;
+        background-color: rgba(128,128,128, 0.5);
+    }
+
+    input[type=text] {
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+
+    .dropdown_group select {
+        display: block;
+        height: 35px;
+        width: 135px;
+    }
+
+    .feedback_group input {
+        display: block;
+    }
+    .titel {
+        position: relative;
+        left: 650px;
+        top: 50px;
+    }
+    h2a{
+        margin-top: 0;
+        margin-bottom: .5rem
+    }
+</style>
+
+
+
+<h2 class="titel"><b>Wat vind u van de nieuwe website?</b></h2>
+
+
+<body>
+    <div>
+        <canvas id="myCanvas"></canvas>
+
+        <label style="position: relative; left: 650px; top: 150px;"><b>Emailadres:</b></label>
+
+        <input type="text" placeholder="Voorbeeld@email.com" style="position: relative; left: 650px; top: 150px;" />
+
+
+        <div class="dropdown_group" style="position:relative; left: 550px; top:750px;">
+            <label><b>Van een schaal van 1 tot 10 wat vind u van de website?</b></label>
+            <select class="form-control" id="Select1To10" name="Select1TO10">
+                <option>Select from 1 to 10</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </div>
+
+        <button style="position: relative; left: 750px; top: 1150px;"> Turn in</button>
+
+
+        <div class="checkbox_group">
+            <label style="position: relative; left: 550px; top: 90px;"> <b>Welk scherm vind u de beste design hebben?</b></label>
+            <input type="checkbox" id="checkbox1" name="CheckedCart" />
+            <label for="checkbox1" style="position: relative; left: 590px; top: 75px;">Email scherm</label>
+
+            <input type="checkbox" id="checkbox2" name="CheckedCart" />
+            <label for="checkbox2" style="position: relative; left: 590px; top: 75px;">Login scherm</label>
+
+            <input type="checkbox" id="checkbox3" name="CheckedCart" value="Isabelle" />
+            <label for="checkbox3" style="position: relative; left: 590px; top: 75px;">Klanten/Contacten scherm</label>
+
+            <input type="checkbox" id="checkbox4" name="CheckedCart" value="Nathan" />
+            <label for="checkbox4" style="position: relative; left: 590px; top: 75px;">Campaign</label>
+        </div>
+
+
+        <div class="radio_group">
+
+            <label style="position: relative; left: 550px; top: 120px;"> <b>Wat vind u de beste feature van de website?</b></label>
+
+            <input type="radio" id="Radio1" name="radio1" />
+            <label for="Radio1" style="position: relative; left: 590px; top: 105px;">Emailen</label>
+
+            <input type="radio" id="Radio2" name="radio2" />
+            <label for="Radio2" style="position: relative; left: 590px; top: 105px;">Campaigns aanmaken</label>
+
+            <input type="radio" id="Radio3" name="radio3" />
+            <label for="Radio3" style="position: relative; left: 590px; top: 105px;">Contacten/klanten inzien</label>
+
+            <input type="radio" id="Radio4" name="radio4" />
+            <label for="Radio4" style="position: relative; left: 590px; top: 105px;">Inloggen</label>
+        </div>
+
+        <div class="feedback_group" style="position: relative; left: 550px; top: 300px;">
+            <label><b> Feedback:</b></label>
+            <input type="text" style="height:200px; width:400px;" />
+
+        </div>
+
+    </div>
+</body>
+
+
+
+
+
+
+
+
