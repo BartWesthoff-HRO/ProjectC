@@ -1,15 +1,75 @@
 ﻿@model IEnumerable<ProjectC.Models.ContactPerson>
-    
+
 
 
 @{ ViewBag.Title = "Contact personen";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
+<style>
+    .open > .dropdown-menu {
+        display: block
+    }
+
+
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+
 <table class="table">
-   
+
     <tr>
-        <th> </th>
+        <th>
+            <div class="dropdown">
+                <button class="btn" type="button" data-toggle="dropdown">
+                    kies lijst
+                </button>
+                <div class="dropdown-content">
+                    @foreach (var list in ViewBag.Lists)
+                    {
+                        <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Index", "ContactPerson", new { id = list.Id }, null)></a>
+                    }
+                    <a class="dropdown-item" @Html.ActionLink("delete filter", "Index", "ContactPerson", new { id = "" }, null)></a>
+                </div>
+            </div>
+        </th>
         <th>
             voornaam
         </th>
@@ -35,53 +95,53 @@
     {
         using (Html.BeginForm("Verwijderen", "ContactPerson", new { id = item.persoonid }))
         {
-<tr>
-    <td>
-        <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn"> inzien</a>
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.voornaam)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.tussenvoegsel)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.achternaam)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.email)
-    </td>
+            <tr>
+                <td>
+                    <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn"> inzien</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.voornaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tussenvoegsel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.achternaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
 
-    <td>
-        @foreach (var iets in item.klantlist)
-        {
-            @("[" + iets.voornaam + "] ");
+                <td>
+                    @foreach (var iets in item.klantlist)
+                    {
+                        @("[" + iets.voornaam + "] ");
 
+                    }
+                </td>
+                <td>
+                    @foreach (var iets in item.labellist)
+                    {
+                        @("[" + iets.labelname + "] ");
+
+                    }
+
+                </td>
+                <td>
+                    <input type="submit" value="Verwijderen" class="btn" />
+                    @* href="~/Contactperson/Delete/@item.persoonid.ToString()"*@
+                </td>
+                <td></td>
+
+
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.personid }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.personid }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.personid })
+                    </td>*@
+            </tr>
         }
-    </td>
-    <td>
-        @foreach (var iets in item.labellist)
-        {
-               @("[" + iets.labelname + "] ");
-
-        }
-
-    </td>
-    <td>
-        <input type="submit" value="Verwijderen" class="btn" />
-        @* href="~/Contactperson/Delete/@item.persoonid.ToString()"*@
-    </td>
-    <td></td>
-
-
-    @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.personid }) |
-            @Html.ActionLink("Details", "Details", new { id = item.personid }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.personid })
-        </td>*@
-</tr>
-        }
-    } 
+    }
 
 
 

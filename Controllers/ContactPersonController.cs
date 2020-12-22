@@ -11,6 +11,7 @@ using ProjectC.DataContext;
 using ProjectC.Models;
 using System.Threading.Tasks;
 using MailChimp.Net;
+using MailChimp.Net.Core;
 
 namespace ProjectC.Controllers
 {
@@ -20,12 +21,61 @@ namespace ProjectC.Controllers
         private ApplicationDBContext db = new ApplicationDBContext();
 
         // GET: ContactPerson
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string id = null)
         {
-            return View(db.ContactPersons.ToList());
+            ViewBag.Lists = await Manager.Lists.GetAllAsync();
+            List<string> allEmailList = new List<string>();
+            if (id == null)
+            {
+                List<string> allId = new List<string>();
+                foreach (List item in await Manager.Lists.GetAllAsync())
+                {
+                    allId.Add(item.Id);
+                }
+
+                foreach (string listid in allId)
+                {
+                    foreach (Member member in await Manager.Members.GetAllAsync(listid,new MemberRequest { Status = Status.Subscribed }))
+                    {
+                        allEmailList.Add(member.EmailAddress);
+                    }
+                }
+
+            }
+            else
+            {
+                allEmailList.Clear();
+                IEnumerable<Member> x = await Manager.Members.GetAllAsync(id, new MemberRequest { Status = Status.Subscribed });
+                foreach (Member member in x.ToList())
+                {
+                    allEmailList.Add(member.EmailAddress);
+                }
+            }
+            var matchedMembers = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email));
+            return View(matchedMembers);
+         
+
         }
 
-        
+        public async Task<ActionResult> mailview()
+        {
+            try
+            {
+                ViewBag.ListId = "3a0f93041f";
+                var model = await Manager.Members.GetAllAsync("b8ddf89ff8");
+                return View(model);
+            }
+            catch (MailChimpException mce)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadGateway, mce.Message);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, ex.Message);
+            }
+        }
+
+
 
         // GET: ContactPerson/Create
         public ActionResult Create()
@@ -52,13 +102,13 @@ namespace ProjectC.Controllers
                     EmailType = "html",
                     MergeFields = new Dictionary<string, object>
                 {
-                    { "FNAME", "hallo" },
-                    { "LNAME", "hillo" }
+                    { "FNAME", "ditispending" },
+                    { "LNAME", "pendinglocal" }
                 }
                 };
 
 
-                var restult = await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
+                await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
                 return RedirectToAction("Index");
 
             }
@@ -123,38 +173,11 @@ namespace ProjectC.Controllers
                 //Tags tags = new Tags();
                 //tags.MemberTags.Add(new Tag() { Name = "Customer", Status = "active" });
                 //await Manager.Members.AddTagsAsync("b8ddf89ff8", contactPerson.email, tags);
-                var result = await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
+                await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
                 return RedirectToAction("Index");
             }
             return View(contactPerson);
         }
-
-        // GET: ContactPerson/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    ContactPerson contactPerson = db.ContactPersons.Find(id);
-        //    if (contactPerson == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(contactPerson);
-        //}
-
-        // POST: ContactPerson/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    ContactPerson contactPerson = db.ContactPersons.Find(id);
-        //    db.ContactPersons.Remove(contactPerson);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

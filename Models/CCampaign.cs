@@ -18,6 +18,7 @@ namespace ProjectC.Models
         public string ListName { get; set; }
         public string URL { get; set; }
         public int? EmailsSent { get; set; }
-        public DateTime DateCreated { get; set; }
+        public string DateCreated { get; set; }
+        public string ListId { get; set; }
     }
 }

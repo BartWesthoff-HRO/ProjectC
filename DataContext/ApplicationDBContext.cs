@@ -20,7 +20,5 @@ namespace ProjectC.DataContext
         public virtual DbSet<ProjectC.Models.label> labels { get; set; }
 
         public virtual DbSet<ProjectC.Models.klant> klants { get; set; }
-
-        public System.Data.Entity.DbSet<ProjectC.Models.CCampaign> CCampaigns { get; set; }
     }
 }
