@@ -81,9 +81,9 @@
                 <div class="dropdown-content">
                     @foreach (var list in ViewBag.Lists)
                     {
-                        <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Sent", "Campaings", new { id = list.Id }, null)></a>
+                        <a class="dropdown-item" href="~/Campaings/Sent/@list.Id">@list.Name</a>
                     }
-                    <a class="dropdown-item" @Html.ActionLink("delete filter", "Sent", "Campaings", new { id = ""}, null)></a>
+                    <a class="dropdown-item"  href="~/Campaings/Sent/">delete filter</a>
                 </div>
             </div>
         <th>ID (test)</th>
@@ -95,14 +95,14 @@
         <th>statistieken</th>
     </tr>
 
-    @foreach(var campaign in Model.CampaignList)
+    @foreach(var campaign in Model.CampaignList.OrderBy(camp => camp.DateCreated))
     {
 <tr>
     <td><a href="@campaign.URL" target="_blank" class="btn">inzien</a></td>
     <td>@campaign.Id</td>
     <td>@campaign.CampaignName</td>
     <td>@campaign.EmailsSent</td>
-    <td>  <a href="~/ContactPerson/Index/@campaign.ListId"> @campaign.ListName</a>        </td> 
+    <td>  <a href="~/ContactPerson/Index/@campaign.ListId">@campaign.ListName</a></td> 
     <td>@campaign.OpenRate </td>
     <td>@campaign.DateCreated</td>
     @*<td> <a class="btn" @Html.ActionLink("Send", "Send", "Campaings", null, null)></a></td>*@

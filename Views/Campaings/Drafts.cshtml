@@ -51,6 +51,22 @@
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
     }
+
+    a {
+        color: black;
+        text-decoration: none;
+        background-color: transparent;
+    }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:link {
+            color: black;
+        }
+
 </style>
 
 <table class="table">
@@ -63,9 +79,9 @@
                 <div class="dropdown-content">
                     @foreach (var list in ViewBag.Lists)
                     {
-                        <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Drafts", "Campaings", new { id = list.Id }, null)></a>
+                        <a class="dropdown-item" href="~/Campaings/Drafts/@list.Id">@list.Name</a>
                     }
-                    <a class="dropdown-item" @Html.ActionLink("delete filter", "Drafts", "Campaings", new { id = "" }, null)></a>
+                    <a class="dropdown-item" href="~/Campaings/Drafts/">delete filter</a>
                 </div>
             </div>
         <th>ID (test)</th>
@@ -77,18 +93,18 @@
         <th>versturen</th>
     </tr>
 
-    @foreach (var campaign in Model.CampaignList)
+    @foreach (var campaign in Model.CampaignList.OrderBy(camp => camp.DateCreated))
     {
-        <tr>
-            <td><a href="@campaign.URL" target="_blank" class="btn"> inzien</a></td>
-            <td>@campaign.Id</td>
-            <td>@campaign.CampaignName</td>
-            <td>@campaign.EmailsSent</td>
-            <td>@campaign.ListName</td>
-            <td>@campaign.OpenRate </td>
-            <td>@campaign.DateCreated</td>
-            <td> <a class="btn" @Html.ActionLink("Send", "Send", "Campaings", new { id = campaign.Id}, null)></a></td>
-        </tr>
+<tr>
+    <td><a href="@campaign.URL" target="_blank" class="btn"> inzien</a></td>
+    <td>@campaign.Id</td>
+    <td>@campaign.CampaignName</td>
+    <td>@campaign.EmailsSent</td>
+    <td><a href="~/ContactPerson/Index/@campaign.ListId">@campaign.ListName</a></td>
+    <td>@campaign.OpenRate </td>
+    <td>@campaign.DateCreated</td>
+    <td> <a class="btn" href="~/Campaings/Send/@campaign.Id">versturen</a></td>
+</tr>
     }
 
 </table>

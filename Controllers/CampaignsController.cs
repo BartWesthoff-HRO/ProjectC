@@ -39,25 +39,29 @@ namespace ProjectC.Controllers
 
 
             var sortedList = await Manager.Campaigns.GetAllAsync(options);
-            Audience audience = new Audience();
+            
             var newCampaignList = new List<CCampaign>();
             foreach (var Campaign in sortedList)
             {
-                var newCampaign = new CCampaign();
-                newCampaign.CampaignName = Campaign.Settings.Title;
-                //newCampaign.ClickRate = Clicks(Campaign.Id).Result;
-                newCampaign.OpenRate = await Manager.Reports.GetCampaignOpenReportCountAsync(Campaign.Id);
-                newCampaign.Id = Campaign.Id;
-                //newCampaign.UnsubRate = await Manager.Reports.GetUnsubscribesCountAsync(id);
-                newCampaign.ListName = Campaign.Recipients.ListName;
-                newCampaign.DateCreated = Campaign.CreateTime.ToString("dd MMMM yyyy");
-                newCampaign.URL = Campaign.ArchiveUrl;
-                newCampaign.EmailsSent = Campaign.EmailsSent;
-                newCampaign.ListId = Campaign.Recipients.ListId;
+                var newCampaign = new CCampaign
+                {
+                    CampaignName = Campaign.Settings.Title,
+                    //newCampaign.ClickRate = Clicks(Campaign.Id).Result;
+                    OpenRate = await Manager.Reports.GetCampaignOpenReportCountAsync(Campaign.Id),
+                    Id = Campaign.Id,
+                    //newCampaign.UnsubRate = await Manager.Reports.GetUnsubscribesCountAsync(id);
+                    ListName = Campaign.Recipients.ListName,
+                    DateCreated = Campaign.CreateTime.ToString("dd MMMM yyyy"),
+                    URL = Campaign.ArchiveUrl,
+                    EmailsSent = Campaign.EmailsSent,
+                    ListId = Campaign.Recipients.ListId
+                };
                 newCampaignList.Add(newCampaign);
             }
 
-            audience.CampaignList = newCampaignList;
+            newCampaignList.OrderBy(camp => camp.DateCreated);
+            Audience audience = new Audience
+            {CampaignList = newCampaignList};
             ViewBag.Lists = await Manager.Lists.GetAllAsync();
 
 
@@ -114,6 +118,8 @@ namespace ProjectC.Controllers
 
                 newCampaignList.Add(newCampaign);
             }
+
+            newCampaignList.OrderBy(camp => camp.DateCreated);
             Audience audience = new Audience
             { CampaignList = newCampaignList };
             ViewBag.Lists = await Manager.Lists.GetAllAsync();
