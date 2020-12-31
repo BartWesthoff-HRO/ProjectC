@@ -5,56 +5,50 @@
 
 
 
-<div class="container">
-    <div class="row align-items-start">
-        <div class="col">
-            <table class="table" style="text-align: center;">
-                <tr>
-                    <th>Labelnaam</th>
-                    <th></th>
-                    <th>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                Anders
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li>
-                                    <a href="~/label/create" class="dropdown-item">Label Toevoegen</a>
-                                </li>
-                                <li>
-                                    <a href="~/ContactPerson/index" class="dropdown-item">Contactpersonen</a>
-                                </li>
-                                <li><a href="~/klant/index" class="dropdown-item"> Klanten</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </th>
-                </tr>
+
+<table class="table">
+    <tr>
+        <th>Labelnaam</th>
+        <th></th>
+        <th class="table-buttons">
+            <div class="dropdown">
+                <button class="btn btn-outline-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Anders
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                        <a href="~/label/create" class="dropdown-item">Label Toevoegen</a>
+                    </li>
+                    <li>
+                        <a href="~/ContactPerson/index" class="dropdown-item">Contactpersonen</a>
+                    </li>
+                    <li><a href="~/klant/index" class="dropdown-item"> Klanten</a>
+                    </li>
+                </ul>
+            </div>
+        </th>
+    </tr>
 
 
-                @foreach (var item in Model)
-                {
-                    using (Html.BeginForm("Verwijderen", "label", new { id = item.labelid }))
-                    {
-            <tr class="table-item">
-                <td>
-                    @Html.DisplayFor(modelItem => item.labelname)
-                </td>
-                <td>
-                    <a href="~/label/Edit/@item.labelid.ToString()" class="btn">Inzien</a>
-                </td>
-                <td>
-                    <input type="submit" value="Verwijderen" class="btn" />
-                </td>
-            </tr>
-                    }
-                }
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Verwijderen", "label", new { id = item.labelid }))
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.labelname)
+    </td>
+    <td class="table-buttons">
+        <a href="~/label/Edit/@item.labelid.ToString()" class="btn">Inzien</a>
+    </td>
+    <td class="table-buttons">
+        <input type="submit" value="Verwijderen" class="btn" />
+    </td>
+</tr>
+        }
+    }
 
 
 
 
-            </table>
-        </div>
-    </div>
-   
-</div>
+</table>
