@@ -22,7 +22,6 @@ namespace ProjectC.Controllers
         }
 
         // GET: label/Details/5
-     
 
         // GET: label/Create
         public ActionResult Create()
@@ -46,10 +45,14 @@ namespace ProjectC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "labelid,labelname")] label labels)
         {
-            if (ModelState.IsValid)
+
+            if (ModelState.IsValid && labels.labelname != null)
             {
                 db.labels.Add(labels);
                 db.SaveChanges();
+                return RedirectToAction("Index");
+            }else
+            {
                 return RedirectToAction("Index");
             }
 

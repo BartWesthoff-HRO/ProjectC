@@ -1792,10 +1792,28 @@ pre {
     }
 }
 
-.labelcontainer{
-    margin: auto;
-    padding: 10px;
-    width: 70%;
+.label-name {
+    background-color: #FEF4EB;
+}
+
+.label-holder {
+    padding: 7%;
+    background-color: #FEF4EB;
+}
+
+.cancel-button{
+    float: left;
+    display: inline-block;
+}
+
+.submit-button{
+    float: left;
+    display: inline-block;
+    padding-left: 55%;
+}
+
+#table-dropdown{
+    border: 1px solid black;
 }
 
 .table-buttons{
@@ -2175,7 +2193,7 @@ select.form-control:focus::-ms-value {
 }
 
 .form-group {
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
 }
 
 .form-text {
