@@ -147,7 +147,7 @@
                     <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn">Inzien</a>
                 </td>
                 <td class="table-buttons">
-                    <input value="Verwijderen" onclick="ConfirmDelete(@item.persoonid)" class="btn" />
+                    <input value="Verwijderen" onclick="ConfirmDelete()" class="btn" />
                     @* href="~/Contactperson/Delete/@item.persoonid.ToString()"*@
                 </td>
 
@@ -161,7 +161,7 @@
 
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog">
-                    <div class="modal-content label-holder">
+                    <div class="modal-content form-holder">
                         <div class="modal-header label-name">
                             <h2 class="label-name">Contactpersoon Verwijderen</h2>
                         </div>
@@ -185,23 +185,15 @@
     }
 </table>
 
-@*hidden field for storing current employeeId*@
-<input type="hidden" id="hiddenEmployeeId" />
+
 
 
 @section scripts{
     <script>
 
-
-
-        var ConfirmDelete = function (EmployeeId) {
-
-            $("#hiddenEmployeeId").val(EmployeeId);
+        var ConfirmDelete = function () {
             $("#myModal").modal('show');
-
         }
-
     </script>
-
 }
 

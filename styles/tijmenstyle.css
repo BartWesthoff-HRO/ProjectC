@@ -1792,11 +1792,28 @@ pre {
     }
 }
 
+.form-name {
+    background-color: #FEF4EB;
+    padding-left: 9%;
+}
+
+.purgatory {
+    padding: 4%;
+    padding-bottom: 2%;
+    background-color: #FEF4EB;
+}
+
+.cp-holder {
+    padding: 4%;
+    padding-bottom: 0;
+    background-color: #FEF4EB;
+}
+
 .label-name {
     background-color: #FEF4EB;
 }
 
-.label-holder {
+.form-holder {
     padding: 7%;
     background-color: #FEF4EB;
 }

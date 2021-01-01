@@ -22,7 +22,8 @@
                     <li>
                         <a href="~/ContactPerson/index" class="dropdown-item">Contactpersonen</a>
                     </li>
-                    <li><a href="~/klant/index" class="dropdown-item">Klanten</a>
+                    <li>
+                        <a href="~/klant/index" class="dropdown-item">Klanten</a>
                     </li>
                 </ul>
             </div>
@@ -42,13 +43,42 @@
                     <a href="~/label/Edit/@item.labelid.ToString()" class="btn">Inzien</a>
                 </td>
                 <td class="table-buttons">
-                    <input type="submit" value="Verwijderen" class="btn" />
+                    <input value="Verwijderen" onclick="ConfirmDelete()" class="btn" />
                 </td>
             </tr>
+
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content form-holder">
+                        <div class="modal-header label-name">
+                            <h2 class="label-name">Label Verwijderen</h2>
+                        </div>
+                        <div class="modal-body label-name">
+                            <h4 class="label-name">Bent u zeker dat u deze Label wilt verwijderen?</h4>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/label" class="btn btn-default" data-dismiss="modal">Terug</a>
+                            <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
         }
     }
-
-
-
-
 </table>
+
+@section scripts{
+    <script>
+
+        var ConfirmDelete = function () {
+            $("#myModal").modal('show');
+
+        }
+    </script>
+}

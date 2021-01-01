@@ -55,8 +55,6 @@ namespace ProjectC.Controllers
             {
                 return RedirectToAction("Index");
             }
-
-            return View(labels);
         }
 
         // GET: label/Edit/5

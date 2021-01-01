@@ -75,6 +75,11 @@ namespace ProjectC.Controllers
             }
         }
 
+        public async Task<ActionResult> Terug()
+        {
+            return RedirectToAction("Index");
+        }
+
 
 
         // GET: ContactPerson/Create
@@ -88,9 +93,9 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
+        public async Task<ActionResult> Opslaan([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && contactPerson.achternaam != null && contactPerson.voornaam != null && contactPerson.email != null)
             {
                 db.ContactPersons.Add(contactPerson);
                 db.SaveChanges();
