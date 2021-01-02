@@ -93,7 +93,7 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Opslaan([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
+        public async Task<ActionResult> Create([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
         {
             if (ModelState.IsValid && contactPerson.achternaam != null && contactPerson.voornaam != null && contactPerson.email != null)
             {

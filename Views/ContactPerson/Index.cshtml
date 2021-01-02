@@ -148,6 +148,28 @@
                 </td>
                 <td class="table-buttons">
                     <input value="Verwijderen" onclick="ConfirmDelete()" class="btn" />
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content form-holder">
+                                <div class="modal-header label-name">
+                                    <h2 class="label-name">Contactpersoon Verwijderen</h2>
+                                </div>
+                                <div class="modal-body label-name">
+                                    <h4 class="label-name">Bent u zeker dat u deze Contactpersoon wilt verwijderen?</h4>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/ContactPerson" class="btn btn-default" data-dismiss="modal">Terug</a>
+                                    <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                     @* href="~/Contactperson/Delete/@item.persoonid.ToString()"*@
                 </td>
 
@@ -158,29 +180,6 @@
                         @Html.ActionLink("Delete", "Delete", new { id = item.personid })
                     </td>*@
             </tr>
-
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content form-holder">
-                        <div class="modal-header label-name">
-                            <h2 class="label-name">Contactpersoon Verwijderen</h2>
-                        </div>
-                        <div class="modal-body label-name">
-                            <h4 class="label-name">Bent u zeker dat u deze Contactpersoon wilt verwijderen?</h4>
-
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <a href="/ContactPerson" class="btn btn-default" data-dismiss="modal">Terug</a>
-                            <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal"/>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
         }
     }
 </table>
