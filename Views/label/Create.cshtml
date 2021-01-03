@@ -15,36 +15,68 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
 
-            <div class="col-lg-6" id="create">
-                <div id="ui">
-                    <form class="form-group">
+                <div class="col-lg-6" id="create">
+                    <div id="ui">
+                        <form class="form-group">
 
-                        @*boveenste row*@
-                        <div class="row form-holder">
-                            <div>
-                                <h5 class="label-name">Labelnaam: </h5>
-                                @Html.EditorFor(model => model.labelname, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.labelname, "", new { @class = "text-danger" })
+                            @*boveenste row*@
+                            <div class="row form-holder">
+                                <div>
+                                    <h5 class="label-name">Labelnaam: </h5>
+                                    @Html.EditorFor(model => model.labelname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.labelname, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-3 cancel-button">
+                                    <a href="/label/index" class="btn btn-default cancel-button">Terug</a>
+                                </div>
+                                <div class="col-3 submit-button">
+                                    <input type="submit" value="Opslaan" class="btn btn-default" />
+                                </div>
                             </div>
-                            <div class="col-3 cancel-button">
-                                <button href="/label/index" class="btn btn-default cancel-button">Terug</button>
-                            </div>
-                            <div class="col-3 submit-button">
-                                <input type="submit" value="Opslaan" class="btn btn-default" />
-                            </div>
-                        </div>
 
-                    </form>
+                                <div class="modal fade" id="exist">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content form-holder">
+                                            <div class="modal-header label-name">
+                                                <h2 class="label-name">Oen!</h2>
+                                            </div>
+                                            <div class="modal-body label-name">
+                                                <h4 class="label-name">Deze label bestaat al! </h4>
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="/label/create" class="btn btn-default" data-dismiss="modal">Terug</a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                        </form>
+                    </div>
+
                 </div>
-                
+                <div class="col-lg-3"></div>
             </div>
-            <div class="col-lg-3"></div>
-        </div>
-    </div>}
+        </div>}
 </body>
+
+@if (ViewBag.Message == "Label Exist")
+{
+    <script>
+        window.onload = function () {
+            $("#exist").modal('show');
+
+        }
+    </script>
+}
