@@ -86,7 +86,7 @@
                     @foreach (var list in ViewBag.Lists)
                     {
                         <li>
-                            <a class="dropdown-item" href="~/Campaings/Drafts/@list.Id">@list.Name 
+                            <a class="dropdown-item" href="~/Campaings/Drafts/@list.Id">@list.Name
                         </li>
                     }
                     <li>
@@ -104,7 +104,7 @@
     {
         <tr>
 
-    <!--<td>@campaign.Id</td>-->
+            <!--<td>@campaign.Id</td>-->
             <td>@campaign.CampaignName</td>
             <td>@campaign.EmailsSent</td>
             <td><a href="~/ContactPerson/Index/@campaign.ListId">@campaign.ListName</a></td>

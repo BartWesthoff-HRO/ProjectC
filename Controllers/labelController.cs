@@ -55,7 +55,8 @@ namespace ProjectC.Controllers
                 db.labels.Add(labels);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }else
+            }
+            else
             {
                 return RedirectToAction("Index");
             }
@@ -93,7 +94,7 @@ namespace ProjectC.Controllers
         }
 
         // GET: label/Delete/5
-     
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
