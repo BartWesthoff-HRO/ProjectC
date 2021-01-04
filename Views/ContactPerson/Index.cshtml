@@ -57,37 +57,56 @@
 
     <tr>
         <th>
+            Voornaam
+        </th>
+        <th>
+            Tussenvoegsel(s)
+        </th>
+        <th>
+            Achternaam
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Bedrijfsnaam
+        </th>
+        <th>Labels</th>
+        <th class="table-buttons">
             <div class="dropdown">
-                <button class="btn" type="button" data-toggle="dropdown">
-                    kies lijst
+                <button class="btn dropdown-toggle" id="table-dropdown" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Kies Lijst
                 </button>
-                <div class="dropdown-content">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach (var list in ViewBag.Lists)
                     {
-                        <a class="dropdown-item" @Html.ActionLink($"{list.Name}", "Index", "ContactPerson", new { id = list.Id }, null)></a>
+                        <li>
+                            @Html.ActionLink($"{list.Name}", "Index", "ContactPerson", new { id = list.Id }, new { @class = "dropdown-item" })
+                        </li>
                     }
-                    <a class="dropdown-item" @Html.ActionLink("delete filter", "Index", "ContactPerson", new { id = "" }, null)></a>
-                </div>
+                    <li>
+                        <a class="dropdown-item" href="/ContactPerson">Verwijder Filter</a>
+                    </li>
+                </ul>
             </div>
         </th>
-        <th>
-            voornaam
-        </th>
-        <th>
-            tussenvoegsel
-        </th>
-        <th>
-            achternaam
-        </th>
-        <th>
-            email
-        </th>
-        <th>
-            bedrijfsnaam
-        </th>
-        <th>labels</th>
-        <th></th>
-        <th>
+        <th class="table-buttons">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" id="table-dropdown" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Anders
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                        <a href="~/contactperson/create" class="dropdown-item">Contactpersoon Toevoegen</a>
+                    </li>
+                    <li>
+                        <a href="~/label/index" class="dropdown-item">Labels</a>
+                    </li>
+                    <li>
+                        <a href="~/klant/index" class="dropdown-item">Klanten</a>
+                    </li>
+                </ul>
+            </div>
         </th>
     </tr>
 
@@ -96,9 +115,6 @@
         using (Html.BeginForm("Verwijderen", "ContactPerson", new { id = item.persoonid }))
         {
             <tr>
-                <td>
-                    <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn"> inzien</a>
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.voornaam)
                 </td>
@@ -127,11 +143,36 @@
                     }
 
                 </td>
-                <td>
-                    <input type="submit" value="Verwijderen" class="btn" />
+                <td class="table-buttons">
+                    <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn">Inzien</a>
+                </td>
+                <td class="table-buttons">
+                    <input value="Verwijderen" onclick="ConfirmDelete()" class="btn" />
+
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content form-holder">
+                                <div class="modal-header label-name">
+                                    <h2 class="label-name">Contactpersoon Verwijderen</h2>
+                                </div>
+                                <div class="modal-body label-name">
+                                    <h4 class="label-name">Bent u zeker dat u deze Contactpersoon wilt verwijderen?</h4>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/ContactPerson" class="btn btn-default" data-dismiss="modal">Terug</a>
+                                    <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                     @* href="~/Contactperson/Delete/@item.persoonid.ToString()"*@
                 </td>
-                <td></td>
 
 
                 @*<td>
@@ -142,15 +183,17 @@
             </tr>
         }
     }
-
-
-
-
 </table>
 
-<p>
-    <a href="~/contactperson/create" class="btn"> contactpersoon toevoegen</a>
-    <a href="~/label/index" class="btn"> Labels</a>
-    <a href="~/klant/index" class="btn"> klanten</a>
-</p>
+
+
+
+@section scripts{
+    <script>
+
+        var ConfirmDelete = function () {
+            $("#myModal").modal('show');
+        }
+    </script>
+}
 

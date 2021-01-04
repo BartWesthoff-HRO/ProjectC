@@ -19,7 +19,7 @@ namespace ProjectC.Models
         public string achternaam { get; set; }
         public string tussenvoegsel { get; set; }
         public string email { get; set; }
-        public List<label> labellist = new List<label> { new label { labelname = "Bart", labelid = 1 }, new label { labelname = "is", labelid = 2 }, new label { labelname = "geweldig", labelid = 3 } };
-        public List<klant> klantlist = new List<klant> { new klant { voornaam = "BART BV" } };
+        public List<label> labellist = new List<label>();
+        public List<klant> klantlist = new List<klant>();
     }
 }
