@@ -1,7 +1,7 @@
 ﻿@model ProjectC.Models.Audience
 
 @{
-    ViewBag.Title = "Saved";
+    ViewBag.Title = "Opgesteld";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -66,52 +66,57 @@
         a:link {
             color: black;
         }
-
 </style>
 
 <table class="table">
     <tr>
-        <th>
+
+        <!--<th>ID (test)</th>-->
+        <th>Email Titel</th>
+        <th>Aantal Ontvangers</th>
+        <th>Publiek</th>
+        <th>Geopend</th>
+        <th>Datum Aangemaakt</th>
+        <th class="table-buttons">
             <div class="dropdown">
-                <button class="btn" type="button" data-toggle="dropdown">
-                    kies lijst
+                <button class="btn dropdown-toggle" id="table-dropdown" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Kies Publiek
                 </button>
-                <div class="dropdown-content">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach (var list in ViewBag.Lists)
                     {
-                        <a class="dropdown-item" href="~/Campaings/Drafts/@list.Id">@list.Name</a>
+                        <li>
+                            <a class="dropdown-item" href="~/Campaings/Drafts/@list.Id">@list.Name 
+                        </li>
                     }
-                    <a class="dropdown-item" href="~/Campaings/Drafts/">delete filter</a>
-                </div>
+                    <li>
+                        <a class="dropdown-item" href="~/Campaings/Drafts/">Verwijder Filter</a>
+                    </li>
+                </ul>
             </div>
-        <th>ID (test)</th>
-        <th>naam campaign</th>
-        <th>aantal ontvangers</th>
-        <th>ontvangers</th>
-        <th>geopend</th>
-        <th>datum aangemaakt</th>
-        <th>versturen</th>
+        </th>
+        <th class="table-buttons">
+            <a href="~/Campaings/Sent" class="btn" id="table-dropdown">E-mails Verstuurd</a>
+        </th>
     </tr>
 
     @foreach (var campaign in Model.CampaignList.OrderBy(camp => camp.DateCreated))
     {
-<tr>
-    <td><a href="@campaign.URL" target="_blank" class="btn"> inzien</a></td>
-    <td>@campaign.Id</td>
-    <td>@campaign.CampaignName</td>
-    <td>@campaign.EmailsSent</td>
-    <td><a href="~/ContactPerson/Index/@campaign.ListId">@campaign.ListName</a></td>
-    <td>@campaign.OpenRate </td>
-    <td>@campaign.DateCreated</td>
-    <td> <a class="btn" href="~/Campaings/Send/@campaign.Id">versturen</a></td>
-</tr>
+        <tr>
+
+    <!--<td>@campaign.Id</td>-->
+            <td>@campaign.CampaignName</td>
+            <td>@campaign.EmailsSent</td>
+            <td><a href="~/ContactPerson/Index/@campaign.ListId">@campaign.ListName</a></td>
+            <td>@campaign.OpenRate </td>
+            <td>@campaign.DateCreated</td>
+            <td class="table-buttons"><a href="@campaign.URL" target="_blank" class="btn"> Inzien</a></td>
+            <td class="table-buttons"> <a class="btn" href="~/Campaings/Send/@campaign.Id">Versturen</a></td>
+        </tr>
     }
 
 </table>
 
-<p>
-    <a href="~/Campaings/Sent" class="btn"> E-mails sent</a>
-</p>
 
 
 

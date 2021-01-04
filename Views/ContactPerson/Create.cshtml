@@ -9,64 +9,62 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="container">
-        <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
-                <div id="ui">
-                    <form class="form-group">
+        <div class="row justify-content-center">
+            <div id="ui">
+                <form class="form-group">
 
-                        @*boveenste row*@
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5>Persoonlijke informatie: </h5>
-                                <label>voornaam:</label>
-                                @Html.EditorFor(model => model.voornaam, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.voornaam, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-6">
-                                <h5>Bedrijfsinformatie: </h5>
-                                <label>email:</label>
-                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                            </div>
+                    @*boveenste row*@
+                    <div class="row cp-holder justify-content-center">
+                        <h5 class="form-name">Persoonlijke informatie: </h5>
+                        <div class="col-lg-4">
+                            <label>Voornaam:</label>
+                            @Html.EditorFor(model => model.voornaam, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.voornaam, "", new { @class = "text-danger" })
                         </div>
-
-                        @*middelste row*@
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label>tussenvoegsel:</label>
-                                @Html.EditorFor(model => model.tussenvoegsel, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.tussenvoegsel, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-6">
-                                <label>labels:</label>
-                                
-                            </div>
+                        <div class="col-lg-2">
+                            <label>Tussenvoegsel(s):</label>
+                            @Html.EditorFor(model => model.tussenvoegsel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.tussenvoegsel, "", new { @class = "text-danger" })
                         </div>
-
-
-                        @*onderste row*@
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label>achternaam:</label>
-                                @Html.EditorFor(model => model.achternaam, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.achternaam, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-6">
-                                <label>bedrijven:</label>
-                                <input type="text" name="username" class="form-control">
-                            </div>
+                        <div class="col-lg-4">
+                            <label>Achternaam:</label>
+                            @Html.EditorFor(model => model.achternaam, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.achternaam, "", new { @class = "text-danger" })
                         </div>
-                    </form>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
                     </div>
-                </div>
+                    @*middelste row*@
+                    <div class="row cp-holder justify-content-center">
+                        <h5 class="form-name">Bedrijfsinformatie: </h5>
+                        <div class="col-lg-4">
+                            <label>Email:</label>
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Bedrijf:</label>
+                            <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="col-lg-2">
+
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Labels:</label>
+                            <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="col-lg-6">
+
+                        </div>
+                    </div>
+                    @*onderste row*@
+                    <div class="row purgatory">
+                        <div class="col-3 cancel-button">
+                            <a href="/contactperson" class="btn btn-default">Terug</a>
+                        </div>
+                        <div class="col-3 submit-button">
+                            <input type="submit" value="Opslaan" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

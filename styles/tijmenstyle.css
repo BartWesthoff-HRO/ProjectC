@@ -210,7 +210,7 @@ svg:not(:root) {
 }
 
 table {
-    border-collapse: collapse
+    border-collapse: collapse;
 }
 
 caption {
@@ -531,6 +531,7 @@ pre {
     margin-right: auto;
     margin-left: auto
 }
+
 
 @media (min-width:576px) {
     .container {
@@ -1791,11 +1792,57 @@ pre {
     }
 }
 
+.form-name {
+    background-color: #FEF4EB;
+    padding-left: 9%;
+}
+
+.purgatory {
+    padding: 4%;
+    padding-bottom: 2%;
+    background-color: #FEF4EB;
+}
+
+.cp-holder {
+    padding: 4%;
+    padding-bottom: 0;
+    background-color: #FEF4EB;
+}
+
+.label-name {
+    background-color: #FEF4EB;
+}
+
+.form-holder {
+    padding: 7%;
+    background-color: #FEF4EB;
+}
+
+.cancel-button{
+    float: left;
+    display: inline-block;
+}
+
+.submit-button{
+    float: left;
+    display: inline-block;
+    padding-left: 55%;
+}
+
+#table-dropdown{
+    border: 1px solid black;
+}
+
+.table-buttons{
+    text-align: center;
+}
+
 .table {
     width: 100%;
     max-width: 100%;
     margin-bottom: 1rem;
     margin-top: 0;
+    vertical-align: middle;
 }
 
 
@@ -2163,7 +2210,7 @@ select.form-control:focus::-ms-value {
 }
 
 .form-group {
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
 }
 
 .form-text {

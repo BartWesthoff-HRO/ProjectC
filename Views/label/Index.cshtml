@@ -5,39 +5,80 @@
 
 
 
+
 <table class="table">
     <tr>
-        <th> </th>
-        <th>@Html.DisplayNameFor(model => model.labelname)</th>
+        <th>Labelnaam</th>
         <th></th>
-        <th></th>
+        <th class="table-buttons">
+            <div class="dropdown">
+                <button class="btn btn-outline-dark dropdown-toggle" id="table-dropdown" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Anders
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                        <a href="~/label/create" class="dropdown-item">Label Toevoegen</a>
+                    </li>
+                    <li>
+                        <a href="~/ContactPerson/index" class="dropdown-item">Contactpersonen</a>
+                    </li>
+                    <li>
+                        <a href="~/klant/index" class="dropdown-item">Klanten</a>
+                    </li>
+                </ul>
+            </div>
+        </th>
     </tr>
 
 
-     @foreach (var item in Model)
-     {
-         using (Html.BeginForm("Verwijderen", "label", new { id = item.labelid }))
-         {
-<tr>
-    <td>
-        <a href="~/label/Edit/@item.labelid.ToString()" class="btn">inzien</a>
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.labelname)
-    </td>
-    <td>
-        <input type="submit" value="Verwijderen" class="btn" />
-    </td>
-    <td></td>
-</tr>}
-     }
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Verwijderen", "label", new { id = item.labelid }))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.labelname)
+                </td>
+                <td class="table-buttons">
+                    <a href="~/label/Edit/@item.labelid.ToString()" class="btn">Inzien</a>
+                </td>
+                <td class="table-buttons">
+                    <input value="Verwijderen" onclick="ConfirmDelete()" class="btn" />
+
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content form-holder">
+                                <div class="modal-header label-name">
+                                    <h2 class="label-name">Label Verwijderen</h2>
+                                </div>
+                                <div class="modal-body label-name">
+                                    <h4 class="label-name">Bent u zeker dat u deze Label wilt verwijderen?</h4>
 
 
 
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/label" class="btn btn-default" data-dismiss="modal">Terug</a>
+                                    <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal" />
+                                </div>
 
+                            </div>
+
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        }
+    }
 </table>
-<p>
-    <a href="~/label/create" class="btn">label toevoegen</a>
-    <a href="~/ContactPerson/index" class="btn">Contactpersonen</a>
-    <a href="~/klant/index" class="btn"> klanten</a>
-</p>
+
+@section scripts{
+    <script>
+
+        var ConfirmDelete = function () {
+            $("#myModal").modal('show');
+
+        }
+    </script>
+}
