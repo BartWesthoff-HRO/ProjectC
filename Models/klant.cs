@@ -12,12 +12,10 @@ namespace ProjectC.Models
     public class klant
     {
         [Key]
-        public int persoonid { get; set; }
-
-        public string voornaam { get; set; }
-        public string achternaam { get; set; }
-        public string tussenvoegsel { get; set; }
-        public string email { get; set; }
+        public int bedrijfsid { get; set; }
+        public string bedrijfsnaam { get; set; }
+        public string bedrijfsemail { get; set; }
+        public string bedrijfsnummer { get; set; }
         
     }
 }

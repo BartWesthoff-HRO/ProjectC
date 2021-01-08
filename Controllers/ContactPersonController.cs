@@ -118,7 +118,7 @@ namespace ProjectC.Controllers
 
             }
             else
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
 
 
 
@@ -128,10 +128,9 @@ namespace ProjectC.Controllers
         // GET: ContactPerson/Edit/5
 
         [HttpPost]
-        public ActionResult Verwijderen(int id)
+        public ActionResult Verwijderen(int pid)
         {
-            ContactPerson contactperson = db.ContactPersons.Where(x => x.persoonid == id).FirstOrDefault();
-            db.ContactPersons.Remove(contactperson);
+            db.ContactPersons.Remove( db.ContactPersons.Where(x => x.persoonid == pid).FirstOrDefault() );
             db.SaveChanges();
             return RedirectToAction("Index");
         }

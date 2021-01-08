@@ -31,7 +31,7 @@ namespace ProjectC.Controllers
         [HttpPost]
         public ActionResult Verwijderen(int id)
         {
-            klant klant = db.klants.Where(x => x.persoonid == id).FirstOrDefault();
+            klant klant = db.klants.Where(x => x.bedrijfsid == id).FirstOrDefault();
             db.klants.Remove(klant);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -42,11 +42,13 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] klant klant)
+        public ActionResult Create([Bind(Include = "bedrijfsid,bedrijfsnaam,bedrijfsemail,bedrijfsnummer")] klant klant)
         {
             if (ModelState.IsValid)
             {
-                db.klants.Add(klant);
+                var temp = klant;
+                temp.bedrijfsid = 1;
+                db.klants.Add(temp);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -74,7 +76,7 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] klant klant)
+        public ActionResult Edit([Bind(Include = "bedrijfsid,bedrijfsnaam,bedrijfsemail,bedrijfsnummer")] klant klant)
         {
             if (ModelState.IsValid)
             {

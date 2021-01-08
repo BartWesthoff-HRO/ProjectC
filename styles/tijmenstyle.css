@@ -1792,6 +1792,10 @@ pre {
     }
 }
 
+.klant-name {
+    background-color: #FEF4EB;
+}
+
 .form-name {
     background-color: #FEF4EB;
     padding-left: 9%;
