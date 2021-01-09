@@ -17,7 +17,7 @@
         </th>
         <th>
         </th>
-        <th>
+        <th class="table-buttons">
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" id="table-dropdown" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     Anders
@@ -51,11 +51,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.bedrijfsnummer)
                 </td>
-                <td>
-                    <input type="submit" value="Verwijderen" class="btn"/>
-                </td>
-                <td>
+                <td class="table-buttons">
                     <a href="~/klant/Edit/@item.bedrijfsid.ToString()" class="btn">Inzien</a>
+                </td>
+                <td class="table-buttons">
+                    <input type="submit" value="Verwijderen" class="btn"/>
                 </td>
             </tr>
         }

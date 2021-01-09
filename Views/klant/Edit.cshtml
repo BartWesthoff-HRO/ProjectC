@@ -48,7 +48,7 @@
 
 
 
-@{ ViewBag.Title = "Klant: " + @Html.DisplayNameFor(model => model.voornaam);
+@{ ViewBag.Title = "Klant: " + @Html.DisplayNameFor(model => model.bedrijfsnaam);
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
@@ -58,7 +58,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.persoonid)
+    @Html.HiddenFor(model => model.bedrijfsid)
     <div class="container">
         <div class="row">
             <div class="col-lg-3"></div>
@@ -67,50 +67,33 @@
                     <form class="form-group">
 
                         <div class="row cp-holder justify-content-center">
-                            <h5 class="form-name">Persoonlijke informatie: </h5>
-                            <div class="col-lg-4">
-                                <label>Voornaam:</label>
-                                @Html.EditorFor(model => model.voornaam, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.voornaam, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-2">
-                                <label>Tussenvoegsel(s):</label>
-                                @Html.EditorFor(model => model.tussenvoegsel, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.tussenvoegsel, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label>Achternaam:</label>
-                                @Html.EditorFor(model => model.achternaam, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.achternaam, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        @*middelste row*@
-                        <div class="row cp-holder justify-content-center">
-                            <h5 class="form-name">Bedrijfsinformatie: </h5>
-                            <div class="col-lg-4">
-                                <label>Email:</label>
-                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label>Bedrijf:</label>
-                                <input type="text" name="username" class="form-control">
-                            </div>
-                            <div class="col-lg-2">
-
-                            </div>
-                            <div class="col-lg-4">
-                                <label>Labels:</label>
-                                <input type="text" name="username" class="form-control">
+                            <h5 class="klant-name">Bedrijfs Informatie</h5>
+                            <div class="col-lg-6">
+                                <label>Bedrijfsnaam</label>
+                                @Html.EditorFor(model => model.bedrijfsnaam, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.bedrijfsnaam, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-lg-6">
-
+                                <label>Bedrijfsemail</label>
+                                @Html.EditorFor(model => model.bedrijfsemail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.bedrijfsemail, "", new { @class = "text-danger" })
                             </div>
+                        </div>
+
+                        @*middelste row*@
+                        @*middelste row*@
+                        <div class="row cp-holder">
+                            <div class="col-lg-6">
+                                <label>Bedrijfsnummer</label>
+                                @Html.EditorFor(model => model.bedrijfsnummer, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.bedrijfsnummer, "", new { @class = "text-danger" })
+                            </div>
+
                         </div>
                         @*onderste row*@
                         <div class="row purgatory">
                             <div class="col-3 cancel-button">
-                                <a href="/contactperson" class="btn btn-default">Terug</a>
+                                <a href="/klant" class="btn btn-default">Terug</a>
                             </div>
                             <div class="col-3 submit-button">
                                 <input type="submit" value="Opslaan" class="btn btn-default" />
