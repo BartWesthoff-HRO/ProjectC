@@ -85,7 +85,10 @@ namespace ProjectC.Controllers
         // GET: ContactPerson/Create
         public ActionResult Create()
         {
-            return View();
+            ContactpersoonViewModel vm = new ContactpersoonViewModel();
+            vm.labels = db.labels.ToList();
+            vm.klanten = db.klants.ToList();
+            return View(vm);
         }
 
         // POST: ContactPerson/Create
@@ -93,16 +96,16 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
+        public async Task<ActionResult> Create(ContactpersoonViewModel contact)
         {
-            if (ModelState.IsValid && contactPerson.achternaam != null && contactPerson.voornaam != null && contactPerson.email != null)
+            if (ModelState.IsValid && contact.persoon.achternaam != null && contact.persoon.voornaam != null && contact.persoon.email != null)
             {
-                db.ContactPersons.Add(contactPerson);
+                db.ContactPersons.Add(contact.persoon);
                 db.SaveChanges();
 
                 var member = new Member
                 {
-                    EmailAddress = contactPerson.email,
+                    EmailAddress = contact.persoon.email,
                     Status = Status.Subscribed,
                     EmailType = "html",
                     MergeFields = new Dictionary<string, object>
@@ -130,7 +133,7 @@ namespace ProjectC.Controllers
         [HttpPost]
         public ActionResult Verwijderen(int pid)
         {
-            db.ContactPersons.Remove( db.ContactPersons.Where(x => x.persoonid == pid).FirstOrDefault() );
+            db.ContactPersons.Remove( db.ContactPersons.Where(x => x.contactpersoonid == pid).FirstOrDefault() );
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -153,7 +156,7 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "persoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
+        public async Task<ActionResult> Edit([Bind(Include = "contactpersoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
         {
             if (ModelState.IsValid)
             {

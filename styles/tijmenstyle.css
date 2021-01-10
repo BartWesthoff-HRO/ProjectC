@@ -1813,6 +1813,10 @@ pre {
     background-color: #FEF4EB;
 }
 
+.lbl-create{
+    margin-bottom: 1rem;
+}
+
 .label-name {
     background-color: #FEF4EB;
 }

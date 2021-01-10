@@ -2,7 +2,7 @@
 
 
 
-@{ ViewBag.Title = "Contact personen";
+@{ ViewBag.Title = "Contactpersonen";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
@@ -54,7 +54,6 @@
 </style>
 
 <table class="table">
-
     <tr>
         <th>
             Voornaam
@@ -112,42 +111,42 @@
 
     @foreach (var item in Model)
     {
-        using (Html.BeginForm("Verwijderen", "ContactPerson", new { id = item.persoonid }))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.voornaam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tussenvoegsel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.achternaam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.email)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.voornaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tussenvoegsel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.achternaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
 
-                <td>
-                    @foreach (var iets in item.klantlist)
-                    {
-                        @("[" + iets.voornaam + "] ");
+            <td>
+                @foreach (var bedr in item.klantlist)
+                {@("[" + bedr.bedrijfsnaam + "] ");
 
-                    }
-                </td>
-                <td>
-                    @foreach (var iets in item.labellist)
-                    {
-                        @("[" + iets.labelname + "] ");
+                }
+            </td>
+            <td>
+                @foreach (var lbl in item.labellist)
+                {@("[" + lbl.labelname + "] ");
 
-                    }
+                }
 
-                </td>
-                <td class="table-buttons">
-                    <a href="~/Contactperson/Edit/@item.persoonid.ToString()" class="btn">Inzien</a>
-                </td>
-                <td class="table-buttons">
-                    <input value="Verwijderen" onclick="ConfirmDelete()" class="btn" />
+            </td>
+            <td class="table-buttons">
+                <a href="~/Contactperson/Edit/@item.contactpersoonid.ToString()" class="btn">Inzien</a>
+            </td>
+            <td class="table-buttons">
+
+                @using (Html.BeginForm("Verwijderen", "ContactPerson", new { pid = item.contactpersoonid }))
+                {
+                    <button type="button" onclick="ConfirmDelete()" data-toggle="myModal" class="btn">Verwijderen</button>
+
 
                     <div class="modal fade" id="myModal">
                         <div class="modal-dialog">
@@ -158,12 +157,12 @@
                                 <div class="modal-body label-name">
                                     <h4 class="label-name">Bent u zeker dat u deze Contactpersoon wilt verwijderen?</h4>
 
-
-
                                 </div>
                                 <div class="modal-footer">
                                     <a href="/ContactPerson" class="btn btn-default" data-dismiss="modal">Terug</a>
+
                                     <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal" />
+
                                 </div>
 
                             </div>
@@ -171,29 +170,18 @@
                         </div>
 
                     </div>
-                    @* href="~/Contactperson/Delete/@item.persoonid.ToString()"*@
-                </td>
-
-
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.personid }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.personid }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.personid })
-                    </td>*@
-            </tr>
+                }
+            </td>
+        </tr>
         }
-    }
 </table>
-
-
-
 
 @section scripts{
     <script>
 
         var ConfirmDelete = function () {
+            console.log()
             $("#myModal").modal('show');
         }
     </script>
 }
-

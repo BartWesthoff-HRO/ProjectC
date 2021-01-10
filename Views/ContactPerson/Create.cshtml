@@ -1,7 +1,9 @@
-﻿@model ProjectC.Models.ContactPerson
+﻿@model ProjectC.Models.ContactpersoonViewModel
 
 @{ ViewBag.Title = "Contactpersoon toevoegen";
-    Layout = "~/Views/Shared/_Layout.cshtml"; }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 
 
 @using (Html.BeginForm())
@@ -18,18 +20,18 @@
                         <h5 class="form-name">Persoonlijke informatie: </h5>
                         <div class="col-lg-4">
                             <label>Voornaam:</label>
-                            @Html.EditorFor(model => model.voornaam, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.voornaam, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.persoon.voornaam, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.persoon.voornaam, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-2">
                             <label>Tussenvoegsel(s):</label>
-                            @Html.EditorFor(model => model.tussenvoegsel, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.tussenvoegsel, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.persoon.tussenvoegsel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.persoon.tussenvoegsel, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-4">
                             <label>Achternaam:</label>
-                            @Html.EditorFor(model => model.achternaam, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.achternaam, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.persoon.achternaam, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.persoon.achternaam, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     @*middelste row*@
@@ -37,19 +39,49 @@
                         <h5 class="form-name">Bedrijfsinformatie: </h5>
                         <div class="col-lg-4">
                             <label>Email:</label>
-                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.persoon.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.persoon.email, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-lg-4">
-                            <label>Bedrijf:</label>
-                            <input type="text" name="username" class="form-control">
+                            <label class="lbl-create">Bedrijf:</label>
+
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" id="labeldrop" type="button" data-bs-toggle="dropdown">
+                                    Kies Bedrijf
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="labeldrop">
+                                    @foreach (var bedrf in Model.klanten)
+                                    {
+                                        <li>
+                                            <a class="dropdown-item">@bedrf.bedrijfsnaam</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+
                         </div>
                         <div class="col-lg-2">
 
                         </div>
                         <div class="col-lg-4">
                             <label>Labels:</label>
-                            <input type="text" name="username" class="form-control">
+
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" id="labeldrop" type="button" data-bs-toggle="dropdown">
+                                    Kies Label
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="labeldrop">
+                                    @foreach(var lbl in Model.labels)
+                                    {
+                                        <li>
+                                            <a class="dropdown-item">@lbl.labelname</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+
                         </div>
                         <div class="col-lg-6">
 
