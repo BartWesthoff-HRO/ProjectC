@@ -126,17 +126,8 @@
             </td>
 
             <td>
-                @foreach (var bedr in item.klantlist)
-                {@("[" + bedr.bedrijfsnaam + "] ");
-
-                }
             </td>
             <td>
-                @foreach (var lbl in item.labellist)
-                {@("[" + lbl.labelname + "] ");
-
-                }
-
             </td>
             <td class="table-buttons">
                 <a href="~/Contactperson/Edit/@item.contactpersoonid.ToString()" class="btn">Inzien</a>

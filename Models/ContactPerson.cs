@@ -18,6 +18,6 @@ namespace ProjectC.Models
         public string achternaam { get; set; }
         public string tussenvoegsel { get; set; }
         public string email { get; set; }
-        public int bedrijfsid { get; set; }
+        public int? bedrijfsid { get; set; }
     }
 }
