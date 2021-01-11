@@ -376,6 +376,8 @@
     <Compile Include="Models\Audience.cs" />
     <Compile Include="Models\CCampaign.cs" />
     <Compile Include="Models\ContactPerson.cs" />
+    <Compile Include="Models\ContactPersoonViewModel.cs" />
+    <Compile Include="Models\Kenmerk.cs" />
     <Compile Include="Models\klant.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\Medewerker.cs" />
