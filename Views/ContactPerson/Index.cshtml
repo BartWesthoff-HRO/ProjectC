@@ -128,19 +128,18 @@
                 <td>
                 </td>
                 <td>
-                    @foreach(var label in Model.kenmerken)
+
+                    @foreach(var name in Model.labels)
                     {
-                        @if(label.contactpersoonid == item.contactpersoonid)
+                        foreach(var kk in Model.kenmerken)
                         {
-                            @foreach(var name in Model.labels)
+                            if(name.labelid == kk.labelid && kk.contactpersoonid == item.contactpersoonid)
                             {
-                                @if(name.labelid == label.labelid)
-                                {
-                                    <span>@name.labelname</span>
-                                }
+                                <button class="btn">@name.labelname</button>
                             }
                         }
                     }
+
                 </td>
                 <td class="table-buttons">
                     <a href="~/Contactperson/Edit/@item.contactpersoonid.ToString()" class="btn">Inzien</a>

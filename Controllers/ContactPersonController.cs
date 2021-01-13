@@ -56,6 +56,7 @@ namespace ProjectC.Controllers
             }
             indexmodel.people = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email)).ToList();
             indexmodel.labels = db.labels.ToList();
+            indexmodel.klanten = db.klants.ToList();
             indexmodel.kenmerken = db.kenmerk.ToList();
             return View(indexmodel);
          
@@ -81,6 +82,7 @@ namespace ProjectC.Controllers
             {
                 db.ContactPersons.Add(contact.persoon);
                 db.SaveChanges();
+                this.Dispose();
                 var searchid = contact.persoon;
                 var person = db.ContactPersons.Where(x => x.achternaam == searchid.achternaam && x.voornaam == searchid.voornaam && x.email == searchid.email && x.bedrijfsid != searchid.bedrijfsid);
 
@@ -89,11 +91,24 @@ namespace ProjectC.Controllers
                 var templist = new List<Kenmerk>();
                 foreach(var kenmerk in labels)
                 {
+                    db = new ApplicationDBContext();
+                    bool saved = false;
                     temp.labelid = kenmerk;
-                    templist.Add(temp); 
+                    db.kenmerk.Add(temp);
+                    while(!saved)
+                    {
+                        try
+                        {
+                            db.SaveChanges();
+                            saved = true;
+                        }
+                        catch
+                        {
+                            saved = false;
+                        }
+                    }
+                    this.Dispose();
                 }
-                db.kenmerk.AddRange(templist);
-                db.SaveChangesAsync();
                 return RedirectToAction("Index");
 
             }

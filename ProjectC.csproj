@@ -377,9 +377,11 @@
     <Compile Include="Models\CCampaign.cs" />
     <Compile Include="Models\ContactPerson.cs" />
     <Compile Include="Models\ContactPersoonViewModel.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\Kenmerk.cs" />
     <Compile Include="Models\klant.cs" />
     <Compile Include="Models\Label.cs" />
+    <Compile Include="Models\LabelViewModel.cs" />
     <Compile Include="Models\Medewerker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -412,6 +414,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -532,6 +536,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Survey\Index.cshtml" />
     <Content Include="Views\ContactPerson\mailview.cshtml" />
+    <Content Include="Views\ContactPerson\_LabelsPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

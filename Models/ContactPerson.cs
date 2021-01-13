@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace ProjectC.Models
 {
-    [Table("Contactpersoon", Schema = "dbo")]
+    [Table("contactpersoon", Schema = "dbo")]
     public class ContactPerson
     {
         [Key]
