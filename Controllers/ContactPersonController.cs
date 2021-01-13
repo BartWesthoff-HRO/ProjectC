@@ -21,6 +21,7 @@ namespace ProjectC.Controllers
         private ApplicationDBContext db = new ApplicationDBContext();
         private List<label> cplabels = new List<label>();
         public ContactpersoonViewModel vm = new ContactpersoonViewModel();
+        public IndexViewModel indexmodel = new IndexViewModel();
 
         // GET: ContactPerson
         public async Task<ActionResult> Index(string id = null)
@@ -53,36 +54,13 @@ namespace ProjectC.Controllers
                     allEmailList.Add(member.EmailAddress);
                 }
             }
-            var matchedMembers = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email));
-            return View(matchedMembers);
+            indexmodel.people = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email)).ToList();
+            indexmodel.labels = db.labels.ToList();
+            indexmodel.kenmerken = db.kenmerk.ToList();
+            return View(indexmodel);
          
 
         }
-
-        public async Task<ActionResult> mailview()
-        {
-            try
-            {
-                ViewBag.ListId = "3a0f93041f";
-                var model = await Manager.Members.GetAllAsync("b8ddf89ff8");
-                return View(model);
-            }
-            catch (MailChimpException mce)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadGateway, mce.Message);
-            }
-            catch (Exception ex)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, ex.Message);
-            }
-        }
-
-        public async Task<ActionResult> Terug()
-        {
-            return RedirectToAction("Index");
-        }
-
-
 
         // GET: ContactPerson/Create
         public ActionResult Create()
@@ -108,12 +86,14 @@ namespace ProjectC.Controllers
 
                 var temp = new Kenmerk();
                 temp.contactpersoonid = searchid.contactpersoonid;
+                var templist = new List<Kenmerk>();
                 foreach(var kenmerk in labels)
                 {
                     temp.labelid = kenmerk;
-                    db.kenmerk.Add(temp);
-                    db.SaveChanges();
+                    templist.Add(temp); 
                 }
+                db.kenmerk.AddRange(templist);
+                db.SaveChangesAsync();
                 return RedirectToAction("Index");
 
             }
