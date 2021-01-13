@@ -87,10 +87,8 @@ namespace ProjectC.Controllers
         // GET: ContactPerson/Create
         public ActionResult Create()
         {
-            HttpContext.Session["Labels"] = new List<label>();
             vm.labels = db.labels.ToList();
             vm.klanten = db.klants.ToList();
-            this.vm.kenmerken = new List<label>();
             return View(vm);
         }
 
