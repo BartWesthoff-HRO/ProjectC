@@ -26,67 +26,78 @@ namespace ProjectC.Controllers
         // GET: ContactPerson
         public async Task<ActionResult> Index(string id = null)
         {
-            ViewBag.Lists = await Manager.Lists.GetAllAsync();
-            List<string> allEmailList = new List<string>();
-            if (id == null)
+            if (Session["username"] != null)
             {
-                List<string> allId = new List<string>();
-                foreach (List item in await Manager.Lists.GetAllAsync())
+                ViewBag.Lists = await Manager.Lists.GetAllAsync();
+                List<string> allEmailList = new List<string>();
+                if (id == null)
                 {
-                    allId.Add(item.Id);
-                }
+                    List<string> allId = new List<string>();
+                    foreach (List item in await Manager.Lists.GetAllAsync())
+                    {
+                        allId.Add(item.Id);
+                    }
 
-                foreach (string listid in allId)
+                    foreach (string listid in allId)
+                    {
+                        foreach (Member member in await Manager.Members.GetAllAsync(listid, new MemberRequest { Status = Status.Subscribed }))
+                        {
+                            allEmailList.Add(member.EmailAddress);
+                        }
+                    }
+
+                }
+                else
                 {
-                    foreach (Member member in await Manager.Members.GetAllAsync(listid,new MemberRequest { Status = Status.Subscribed }))
+                    allEmailList.Clear();
+                    IEnumerable<Member> x = await Manager.Members.GetAllAsync(id, new MemberRequest { Status = Status.Subscribed });
+                    foreach (Member member in x.ToList())
                     {
                         allEmailList.Add(member.EmailAddress);
                     }
                 }
+                indexmodel.people = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email)).ToList();
+                indexmodel.labels = db.labels.ToList();
+                indexmodel.klanten = db.klants.ToList();
+                indexmodel.kenmerken = db.kenmerk.ToList();
+                return View(indexmodel);
+
 
             }
-            else
-            {
-                allEmailList.Clear();
-                IEnumerable<Member> x = await Manager.Members.GetAllAsync(id, new MemberRequest { Status = Status.Subscribed });
-                foreach (Member member in x.ToList())
-                {
-                    allEmailList.Add(member.EmailAddress);
-                }
-            }
-            indexmodel.people = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email)).ToList();
-            indexmodel.labels = db.labels.ToList();
-            indexmodel.klanten = db.klants.ToList();
-            indexmodel.kenmerken = db.kenmerk.ToList();
-            return View(indexmodel);
-         
-
+            else { return Redirect("/Login");}
         }
 
         // GET: ContactPerson/Create
         public ActionResult Create()
         {
-            vm.labels = db.labels.ToList();
-            vm.klanten = db.klants.ToList();
-            return View(vm);
-        }
+         
+                vm.labels = db.labels.ToList();
+                vm.klanten = db.klants.ToList();
+                return View(vm);
+            }
 
-        // POST: ContactPerson/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+            // POST: ContactPerson/Create
+            // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+            // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ContactpersoonViewModel contact, int[] labels)
         {
-            if (!ModelState.IsValid && contact.persoon.achternaam != null && contact.persoon.voornaam != null && contact.persoon.email != null)
+            if (Session["username"] != null)
             {
-                db.ContactPersons.Add(contact.persoon);
-                db.SaveChanges();
-                /**/return RedirectToAction("Index");
+                if (!ModelState.IsValid && contact.persoon.achternaam != null && contact.persoon.voornaam != null && contact.persoon.email != null)
+                {
+                    db.ContactPersons.Add(contact.persoon);
+                    db.SaveChanges();
+                    /**/
+                    return RedirectToAction("Index");
 
+                }
+                else
+                    return RedirectToAction("Create");
             }
-            else
-                return RedirectToAction("Create");
+            else { return Redirect("/Login"); }
+
         }
 
         // GET: ContactPerson/Edit/5
@@ -120,34 +131,41 @@ namespace ProjectC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "contactpersoonid,voornaam,achternaam,tussenvoegsel,email")] ContactPerson contactPerson)
         {
-            if (ModelState.IsValid)
+            if (Session["username"] != null)
             {
-                db.Entry(contactPerson).State = EntityState.Modified;
-                db.SaveChanges();
-                Dictionary<string, object> dictionaries = new Dictionary<string, object>
+                if (ModelState.IsValid)
+                {
+                    db.Entry(contactPerson).State = EntityState.Modified;
+                    db.SaveChanges();
+                    Dictionary<string, object> dictionaries = new Dictionary<string, object>
                 {
                     { "FNAME", "Foo" },
                     { "LNAME", "Bar" }
                 };
-                var member = new Member
-                {
-                    EmailAddress = contactPerson.email,
-                    Status = Status.Subscribed,
-                    EmailType = "html",
-                    //TimestampSignup = "12/10/20 4:28PM",
-                    
-                    MergeFields = dictionaries,
-                };
+                    var member = new Member
+                    {
+                        EmailAddress = contactPerson.email,
+                        Status = Status.Subscribed,
+                        EmailType = "html",
+                        //TimestampSignup = "12/10/20 4:28PM",
 
-                //Tags tags = new Tags();
-                //tags.MemberTags.Add(new Tag() { Name = "Customer", Status = "active" });
-                //await Manager.Members.AddTagsAsync("b8ddf89ff8", contactPerson.email, tags);
-                await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
-                return RedirectToAction("Index");
+                        MergeFields = dictionaries,
+                    };
+
+                    //Tags tags = new Tags();
+                    //tags.MemberTags.Add(new Tag() { Name = "Customer", Status = "active" });
+                    //await Manager.Members.AddTagsAsync("b8ddf89ff8", contactPerson.email, tags);
+                    await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
+                    return RedirectToAction("Index");
+                }
+                return View(contactPerson);
             }
-            return View(contactPerson);
+            else
+            {
+                return Redirect("/Login");
+            }
         }
-        protected override void Dispose(bool disposing)
+    protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

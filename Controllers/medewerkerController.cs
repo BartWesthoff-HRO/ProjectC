@@ -18,28 +18,59 @@ namespace ProjectC.Controllers
         // GET: medewerker
         public ActionResult Index()
         {
-            return View(db.Medewerkers.ToList());
+            if (Session["username"] != null)
+            {
+                return View(db.Medewerkers.ToList());
+            }
+
+            else
+            {
+                return Redirect("/Login");
+            }
         }
 
         // GET: medewerker/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (Session["username"] != null)
+            {if (Session["username"] != null)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Medewerker medewerker = db.Medewerkers.Find(id);
+                    if (medewerker == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(medewerker);
+                }
+                else
+                {
+                    return Redirect("/Login");
+                }
             }
-            Medewerker medewerker = db.Medewerkers.Find(id);
-            if (medewerker == null)
+
+
+            else
             {
-                return HttpNotFound();
+                return Redirect("/Login");
             }
-            return View(medewerker);
         }
 
         // GET: medewerker/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
+
         }
 
         // POST: medewerker/Create
@@ -49,30 +80,45 @@ namespace ProjectC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "medewerkerid,gebruikersnaam,wachtwoord")] Medewerker medewerker)
         {
-            if (ModelState.IsValid)
+       
+            if (Session["username"] != null)
             {
-                db.Medewerkers.Add(medewerker);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Medewerkers.Add(medewerker);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(medewerker);
             }
-
-            return View(medewerker);
+            else
+            {
+                return Redirect("/Login");
+            }
         }
 
-        // GET: medewerker/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+
+    // GET: medewerker/Edit/5
+    public ActionResult Edit(int? id)
+            {if (Session["username"] != null)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Medewerker medewerker = db.Medewerkers.Find(id);
+                    if (medewerker == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(medewerker);
+                }
+                else
+                {
+                    return Redirect("/Login");
+                }
             }
-            Medewerker medewerker = db.Medewerkers.Find(id);
-            if (medewerker == null)
-            {
-                return HttpNotFound();
-            }
-            return View(medewerker);
-        }
 
         // POST: medewerker/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -80,29 +126,41 @@ namespace ProjectC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "medewerkerid,gebruikersnaam,wachtwoord")] Medewerker medewerker)
-        {
-            if (ModelState.IsValid)
+        {if (Session["username"] != null)
             {
-                db.Entry(medewerker).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(medewerker).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(medewerker);
             }
-            return View(medewerker);
+            else
+            {
+                return Redirect("/Login");
+            }
         }
 
         // GET: medewerker/Delete/5
         public ActionResult Delete(int? id)
-        {
-            if (id == null)
+        {if (Session["username"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Medewerker medewerker = db.Medewerkers.Find(id);
+                if (medewerker == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(medewerker);
             }
-            Medewerker medewerker = db.Medewerkers.Find(id);
-            if (medewerker == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("/Login");
             }
-            return View(medewerker);
         }
 
         // POST: medewerker/Delete/5

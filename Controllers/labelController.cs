@@ -18,15 +18,30 @@ namespace ProjectC.Controllers
         // GET: label
         public ActionResult Index()
         {
-            return View(db.labels.ToList());
+            if (Session["username"] != null)
+            {
+                return View(db.labels.ToList());
+
         }
+        else { return Redirect("/Login");
+    }
+}
 
         // GET: label/Details/5
 
         // GET: label/Create
         public ActionResult Create()
         {
-            return View();
+
+            if (Session["username"] != null)
+            {
+                return View();
+
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
         }
 
         [HttpPost]
@@ -45,36 +60,51 @@ namespace ProjectC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "labelid,labelname")] label labels)
         {
-            if (ModelState.IsValid && labels.labelname != null)
+            if (Session["username"] != null)
             {
-                if (db.labels.Any(check => check.labelname == labels.labelname))
+
+                if (ModelState.IsValid && labels.labelname != null)
                 {
-                    ViewBag.Message = string.Format("Label Exist");
-                    return View();
+                    if (db.labels.Any(check => check.labelname == labels.labelname))
+                    {
+                        ViewBag.Message = string.Format("Label Exist");
+                        return View();
+                    }
+                    db.labels.Add(labels);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                db.labels.Add(labels);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
-                return RedirectToAction("Index");
+                return Redirect("/Login");
             }
         }
 
         // GET: label/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["username"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                label labels = db.labels.Find(id);
+                if (labels == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(labels);
             }
-            label labels = db.labels.Find(id);
-            if (labels == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("/Login");
             }
-            return View(labels);
         }
 
         // POST: label/Edit/5
@@ -84,13 +114,20 @@ namespace ProjectC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "labelid,labelname")] label labels)
         {
-            if (ModelState.IsValid)
+            if (Session["username"] != null)
             {
-                db.Entry(labels).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(labels).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(labels);
             }
-            return View(labels);
+            else
+            {
+                return Redirect("/Login");
+            }
         }
 
         // GET: label/Delete/5

@@ -10,9 +10,13 @@ namespace ProjectC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            if (Session["username"] != null)
+            {
+                return View();
+            }
+            else { return Redirect("/Login"); }
 
-       
+
+        }
     }
 }

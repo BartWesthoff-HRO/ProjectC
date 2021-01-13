@@ -18,13 +18,23 @@ namespace ProjectC.Controllers
         // GET: klant
         public ActionResult Index()
         {
-            return View(db.klants.ToList());
+            if (Session["username"] != null)
+            {
+                return View(db.klants.ToList());
+            }
+            else { return Redirect("/Login"); }
         }
 
-        // GET: klant/Create
+
+        //GET: klant/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["username"] != null)
+            {
+                return View();
+            }
+            else { return Redirect("/Login"); }
+
         }
 
 
@@ -44,31 +54,57 @@ namespace ProjectC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "bedrijfsid,bedrijfsnaam,bedrijfsemail,bedrijfsnummer")] klant klant)
         {
-            if (ModelState.IsValid)
-            {
-                var temp = klant;
-                temp.bedrijfsid = 1;
-                db.klants.Add(temp);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            if (Session["username"] != null)
+            {if (Session["username"] != null)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        var temp = klant;
+                        temp.bedrijfsid = 1;
+                        db.klants.Add(temp);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View(klant);
+                }
+                else
+                {
+                    return Redirect("/Login");
+                }
             }
+            else { return Redirect("/Login"); }
 
-            return View(klant);
         }
 
         // GET: klant/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (Session["username"] != null)
+            {if (Session["username"] != null)
+                {if (Session["username"] != null)
+                    {
+                        if (id == null)
+                        {
+                            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                        }
+                        klant klant = db.klants.Find(id);
+                        if (klant == null)
+                        {
+                            return HttpNotFound();
+                        }
+                        return View(klant);
+                    }
+                    else
+                    {
+                        return Redirect("/Login");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login");
+                }
             }
-            klant klant = db.klants.Find(id);
-            if (klant == null)
-            {
-                return HttpNotFound();
-            }
-            return View(klant);
+            else { return Redirect("/Login"); }
         }
 
         // POST: klant/Edit/5
@@ -78,28 +114,50 @@ namespace ProjectC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "bedrijfsid,bedrijfsnaam,bedrijfsemail,bedrijfsnummer")] klant klant)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(klant).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            if (Session["username"] != null)
+            {if (Session["username"] != null)
+                {if (Session["username"] != null)
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            db.Entry(klant).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        return View(klant);
+                    }
+                    else
+                    {
+                        return Redirect("/Login");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login");
+                }
             }
-            return View(klant);
+            else { return Redirect("/Login"); }
         }
 
         // GET: klant/Delete/5
         public ActionResult Delete(int? id)
-        {
-            if (id == null)
+        {if (Session["username"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                klant klant = db.klants.Find(id);
+                if (klant == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(klant);
             }
-            klant klant = db.klants.Find(id);
-            if (klant == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("/Login");
             }
-            return View(klant);
         }
 
         // POST: klant/Delete/5
