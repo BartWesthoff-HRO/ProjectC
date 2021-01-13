@@ -67,26 +67,27 @@
                         <div class="col-lg-4">
                             <label>Labels:</label>
 
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" id="labeldrop" type="button" data-bs-toggle="dropdown">
-                                    Kies Label
-                                </button>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="labeldrop" type="button" data-bs-toggle="dropdown">
+                                        Kies Label
+                                    </button>
 
-                                <ul class="dropdown-menu" aria-labelledby="labeldrop">
-                                    @foreach(var lbl in Model.labels)
-                                    {
-                                        <li>
-                                            <a class="dropdown-item">@lbl.labelname</a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
+                                    <ul class="dropdown-menu" aria-labelledby="labeldrop">
+
+                                        @foreach (var lbl in Model.labels)
+                                        {
+
+                                                <li>
+                                                    <input id="@lbl.labelid" type="checkbox" value="@lbl.labelid" name="labels" /><span> @lbl.labelname</span>
+                                                    
+                                                </li>
+                                        }
+                                    </ul>
+                                </div>
+                        </div>
+                        <div class="col-lg-6" id="panel">
 
                         </div>
-                        <div class="col-lg-6">
-
-                        </div>
-                    </div>
                     @*onderste row*@
                     <div class="row purgatory">
                         <div class="col-3 cancel-button">
@@ -101,7 +102,7 @@
         </div>
     </div>
 
-}
+                                        }
 
 
 
@@ -119,3 +120,8 @@
         resize: none;
     }
 </style>
+
+@section scripts{
+    <script src="jquery.min.js"></script>
+    <script src="jquery.multiselect.js"></script>
+}

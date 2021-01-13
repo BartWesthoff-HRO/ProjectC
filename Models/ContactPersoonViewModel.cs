@@ -14,6 +14,8 @@ namespace ProjectC.Models
     {
         public List<label> labels { get; set; }
         public List<klant> klanten { get; set; }
+        public List<label> kenmerken { get; set; }
         public ContactPerson persoon { get; set; }
+
     }
 }

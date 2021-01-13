@@ -111,48 +111,48 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.voornaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tussenvoegsel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.achternaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.voornaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tussenvoegsel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.achternaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
 
-            <td>
-            </td>
-            <td>
-            </td>
-            <td class="table-buttons">
-                <a href="~/Contactperson/Edit/@item.contactpersoonid.ToString()" class="btn">Inzien</a>
-            </td>
-            <td class="table-buttons">
+                <td>
+                </td>
+                <td>
+                </td>
+                <td class="table-buttons">
+                    <a href="~/Contactperson/Edit/@item.contactpersoonid.ToString()" class="btn">Inzien</a>
+                </td>
+                <td class="table-buttons">
 
-                @using (Html.BeginForm("Verwijderen", "ContactPerson", new { pid = item.contactpersoonid }))
-                {
-                    <button type="button" onclick="ConfirmDelete()" data-toggle="myModal" class="btn">Verwijderen</button>
+                        <button type="button" onclick="ConfirmDelete()" data-id="@item.contactpersoonid" data-toggle="myModal" class="btn">Verwijderen</button>
 
 
-                    <div class="modal fade" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content form-holder">
-                                <div class="modal-header label-name">
-                                    <h2 class="label-name">Contactpersoon Verwijderen</h2>
-                                </div>
-                                <div class="modal-body label-name">
-                                    <h4 class="label-name">Bent u zeker dat u deze Contactpersoon wilt verwijderen?</h4>
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content form-holder">
+                                    <div class="modal-header label-name">
+                                        <h2 class="label-name">Contactpersoon Verwijderen</h2>
+                                    </div>
+                                    <div class="modal-body label-name">
+                                        <h4 class="label-name">Bent u zeker dat u deze Contactpersoon wilt verwijderen?</h4>
 
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="/ContactPerson" class="btn btn-default" data-dismiss="modal">Terug</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="/contactperson" class="btn btn-default" data-dismiss="modal">Terug</a>
 
-                                    <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal" />
+                                        <input type="submit" value="Verwijderen" class="btn" data-dismiss="modal" />
+
+                                    </div>
 
                                 </div>
 
@@ -160,18 +160,15 @@
 
                         </div>
 
-                    </div>
-                }
-            </td>
-        </tr>
+                </td>
+            </tr>
         }
 </table>
 
 @section scripts{
     <script>
 
-        var ConfirmDelete = function () {
-            console.log()
+        var ConfirmDelete = function (id) {
             $("#myModal").modal('show');
         }
     </script>

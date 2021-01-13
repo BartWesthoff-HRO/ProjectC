@@ -16,7 +16,7 @@ namespace ProjectC.DataContext
 
         public virtual DbSet<Medewerker> Medewerkers { get; set; }
         public virtual DbSet<ContactPerson> ContactPersons { get; set; }
-
+        public virtual DbSet<Kenmerk> kenmerk { get; set; }
         public virtual DbSet<ProjectC.Models.label> labels { get; set; }
 
         public virtual DbSet<ProjectC.Models.klant> klants { get; set; }

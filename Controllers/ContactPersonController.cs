@@ -19,6 +19,8 @@ namespace ProjectC.Controllers
     {
         private static MailChimpManager Manager = new MailChimpManager("c21b2291eb1b26c7ea4b1a86908dcc78-us2");
         private ApplicationDBContext db = new ApplicationDBContext();
+        private List<label> cplabels = new List<label>();
+        public ContactpersoonViewModel vm = new ContactpersoonViewModel();
 
         // GET: ContactPerson
         public async Task<ActionResult> Index(string id = null)
@@ -85,9 +87,10 @@ namespace ProjectC.Controllers
         // GET: ContactPerson/Create
         public ActionResult Create()
         {
-            ContactpersoonViewModel vm = new ContactpersoonViewModel();
+            HttpContext.Session["Labels"] = new List<label>();
             vm.labels = db.labels.ToList();
             vm.klanten = db.klants.ToList();
+            this.vm.kenmerken = new List<label>();
             return View(vm);
         }
 
@@ -96,44 +99,37 @@ namespace ProjectC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ContactpersoonViewModel contact)
+        public async Task<ActionResult> Create(ContactpersoonViewModel contact, int[] labels)
         {
-            if (ModelState.IsValid && contact.persoon.achternaam != null && contact.persoon.voornaam != null && contact.persoon.email != null)
+            if (!ModelState.IsValid && contact.persoon.achternaam != null && contact.persoon.voornaam != null && contact.persoon.email != null)
             {
                 db.ContactPersons.Add(contact.persoon);
                 db.SaveChanges();
+                var searchid = contact.persoon;
+                var person = db.ContactPersons.Where(x => x.achternaam == searchid.achternaam && x.voornaam == searchid.voornaam && x.email == searchid.email && x.bedrijfsid != searchid.bedrijfsid);
 
-                var member = new Member
+                var temp = new Kenmerk();
+                temp.contactpersoonid = searchid.contactpersoonid;
+                foreach(var kenmerk in labels)
                 {
-                    EmailAddress = contact.persoon.email,
-                    Status = Status.Subscribed,
-                    EmailType = "html",
-                    MergeFields = new Dictionary<string, object>
-                {
-                    { "FNAME", "ditispending" },
-                    { "LNAME", "pendinglocal" }
+                    temp.labelid = kenmerk;
+                    db.kenmerk.Add(temp);
+                    db.SaveChanges();
                 }
-                };
-
-
-                await Manager.Members.AddOrUpdateAsync("b8ddf89ff8", member);
                 return RedirectToAction("Index");
 
             }
             else
                 return RedirectToAction("Create");
-
-
-
-
         }
 
         // GET: ContactPerson/Edit/5
 
         [HttpPost]
-        public ActionResult Verwijderen(int pid)
+        public ActionResult Verwijderen(int? pid)
         {
-            db.ContactPersons.Remove( db.ContactPersons.Where(x => x.contactpersoonid == pid).FirstOrDefault() );
+            pid = ViewBag.CID;
+            db.ContactPersons.Remove(db.ContactPersons.Where(x => x.contactpersoonid == pid).FirstOrDefault());
             db.SaveChanges();
             return RedirectToAction("Index");
         }
