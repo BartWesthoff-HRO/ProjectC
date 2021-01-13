@@ -74,7 +74,7 @@
         <th>Email Titel</th>
         <th>Aantal Ontvangers</th>
         <th>Publiek</th>
-        <th>Geopend</th>
+        <th>Geopend(%)</th>
         <th>Datum Aangemaakt</th>
         <!--<th class="table-buttons">Statistieken</th>-->
         <th class="table-buttons">
@@ -107,7 +107,7 @@
             <td>@campaign.CampaignName</td>
             <td>@campaign.EmailsSent</td>
             <td>  <a href="~/ContactPerson/Index/@campaign.ListId">@campaign.ListName</a></td>
-            <td>@campaign.OpenRate </td>
+            <td>@campaign.OpenRate%</td>
             <td>@campaign.DateCreated</td>
             <td class="table-buttons"> <a class="btn"> Statistiek Inzien</a> </td>
             <td class="table-buttons"><a href="@campaign.URL" target="_blank" class="btn">Email Inzien</a></td>

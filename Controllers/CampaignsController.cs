@@ -108,7 +108,7 @@ namespace ProjectC.Controllers
                 var newCampaign = new CCampaign();
                 newCampaign.CampaignName = Campaign.Settings.Title;
                 //newCampaign.ClickRate = Clicks(Campaign.Id).Result;
-                newCampaign.OpenRate = await Manager.Reports.GetCampaignOpenReportCountAsync(Campaign.Id); 
+                newCampaign.OpenRate = ((await Manager.Reports.GetCampaignOpenReportCountAsync(Campaign.Id)) / (float)Campaign.EmailsSent) * 100.0; 
                 newCampaign.Id = Campaign.Id;
                 //newCampaign.UnsubRate = await Manager.Reports.GetUnsubscribesCountAsync(id);
                 newCampaign.ListName = Campaign.Recipients.ListName;

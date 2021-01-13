@@ -590,3 +590,4 @@ C:\Users\nsami\ProjectC\obj\Debug\ProjectC.csproj.CoreCompileInputs.cache
 C:\Users\nsami\ProjectC\obj\Debug\ProjectC.csproj.CopyComplete
 C:\Users\nsami\ProjectC\obj\Debug\ProjectC.dll
 C:\Users\nsami\ProjectC\obj\Debug\ProjectC.pdb
+C:\Users\nsami\ProjectC\obj\Debug\ProjectC.csprojAssemblyReference.cache

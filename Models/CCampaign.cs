@@ -12,7 +12,7 @@ namespace ProjectC.Models
         public string CampaignName { get; set; }
         public string Id { get; set; }
         public int ClickRate { get; set; }
-        public int OpenRate { get; set; }
+        public double OpenRate { get; set; }
         public int UnsubRate { get; set; }
         public List<CCampaign> Searches { get; set; }
         public string ListName { get; set; }

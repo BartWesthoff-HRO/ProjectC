@@ -82,34 +82,7 @@ namespace ProjectC.Controllers
             {
                 db.ContactPersons.Add(contact.persoon);
                 db.SaveChanges();
-                this.Dispose();
-                var searchid = contact.persoon;
-                var person = db.ContactPersons.Where(x => x.achternaam == searchid.achternaam && x.voornaam == searchid.voornaam && x.email == searchid.email && x.bedrijfsid != searchid.bedrijfsid);
-
-                var temp = new Kenmerk();
-                temp.contactpersoonid = searchid.contactpersoonid;
-                var templist = new List<Kenmerk>();
-                foreach(var kenmerk in labels)
-                {
-                    db = new ApplicationDBContext();
-                    bool saved = false;
-                    temp.labelid = kenmerk;
-                    db.kenmerk.Add(temp);
-                    while(!saved)
-                    {
-                        try
-                        {
-                            db.SaveChanges();
-                            saved = true;
-                        }
-                        catch
-                        {
-                            saved = false;
-                        }
-                    }
-                    this.Dispose();
-                }
-                return RedirectToAction("Index");
+                /**/return RedirectToAction("Index");
 
             }
             else
