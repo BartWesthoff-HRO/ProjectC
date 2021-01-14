@@ -1,2 +1,42 @@
-﻿@{ ViewBag.Title = "resultaten";
+﻿@model IEnumerable<ProjectC.Models.Survey>
+
+
+
+
+@{ ViewBag.Title = "resultaten";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+
+<table class="table">
+    <tr>
+        <th> Email</th>
+        <th>Wat is volgens u het sterkste punt van de website?</th>
+        <th>Wat is volgens u het zwakste punt van de website?</th>
+        <th>Wat vind u het meest overzichtelijk van de website?</th>
+        <th>Wat vind u het minste overzichtelijk aan de website?</th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer2)
+            </td>
+        </tr>
+    }
+
+
