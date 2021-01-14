@@ -21,46 +21,46 @@ namespace ProjectC.Controllers
         private ApplicationDBContext db = new ApplicationDBContext();
         private List<label> cplabels = new List<label>();
         public ContactpersoonViewModel vm = new ContactpersoonViewModel();
-        public IndexViewModel indexmodel = new IndexViewModel();
+        //public IndexViewModel indexmodel = new IndexViewModel();
 
         // GET: ContactPerson
-        public async Task<ActionResult> Index(string id = null)
-        {
-            ViewBag.Lists = await Manager.Lists.GetAllAsync();
-            List<string> allEmailList = new List<string>();
-            if (id == null)
-            {
-                List<string> allId = new List<string>();
-                foreach (List item in await Manager.Lists.GetAllAsync())
-                {
-                    allId.Add(item.Id);
-                }
+        //public async Task<ActionResult> Index(string id = null)
+        //{
+        //    ViewBag.Lists = await Manager.Lists.GetAllAsync();
+        //    List<string> allEmailList = new List<string>();
+        //    if (id == null)
+        //    {
+        //        List<string> allId = new List<string>();
+        //        foreach (List item in await Manager.Lists.GetAllAsync())
+        //        {
+        //            allId.Add(item.Id);
+        //        }
 
-                foreach (string listid in allId)
-                {
-                    foreach (Member member in await Manager.Members.GetAllAsync(listid,new MemberRequest { Status = Status.Subscribed }))
-                    {
-                        allEmailList.Add(member.EmailAddress);
-                    }
-                }
+        //        foreach (string listid in allId)
+        //        {
+        //            foreach (Member member in await Manager.Members.GetAllAsync(listid,new MemberRequest { Status = Status.Subscribed }))
+        //            {
+        //                allEmailList.Add(member.EmailAddress);
+        //            }
+        //        }
 
-            }
-            else
-            {
-                allEmailList.Clear();
-                IEnumerable<Member> x = await Manager.Members.GetAllAsync(id, new MemberRequest { Status = Status.Subscribed });
-                foreach (Member member in x.ToList())
-                {
-                    allEmailList.Add(member.EmailAddress);
-                }
-            }
-            indexmodel.people = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email)).ToList();
-            indexmodel.labels = db.labels.ToList();
-            indexmodel.kenmerken = db.kenmerk.ToList();
-            return View(indexmodel);
+        //    }
+        //    else
+        //    {
+        //        allEmailList.Clear();
+        //        IEnumerable<Member> x = await Manager.Members.GetAllAsync(id, new MemberRequest { Status = Status.Subscribed });
+        //        foreach (Member member in x.ToList())
+        //        {
+        //            allEmailList.Add(member.EmailAddress);
+        //        }
+        //    }
+            //indexmodel.people = db.ContactPersons.Where(persoon => allEmailList.Contains(persoon.email)).ToList();
+            //indexmodel.labels = db.labels.ToList();
+            //indexmodel.kenmerken = db.kenmerk.ToList();
+            //return View(indexmodel);
          
 
-        }
+        //}
 
         // GET: ContactPerson/Create
         public ActionResult Create()

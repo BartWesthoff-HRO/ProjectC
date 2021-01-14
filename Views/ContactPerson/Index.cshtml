@@ -1,8 +1,8 @@
-﻿@model ProjectC.Models.IndexViewModel
+﻿
 
 
 
-@{ ViewBag.Title = "Contactpersonen";
+@*@{ ViewBag.Title = "Contactpersonen";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
@@ -130,13 +130,13 @@
                 <td>
                     @foreach(var label in Model.kenmerken)
                     {
-                        @if(label.contactpersoonid == item.contactpersoonid)
+                        if(label.contactpersoonid == item.contactpersoonid)
                         {
-                            @foreach(var name in Model.labels)
+                            foreach(var name in Model.labels)
                             {
-                                @if(name.labelid == label.labelid)
+                                if(name.labelid == label.labelid)
                                 {
-                                    <span>@name.labelname</span>
+                                    <span>name.labelname</span>
                                 }
                             }
                         }
@@ -185,4 +185,4 @@
             $("#myModal").modal('show');
         }
     </script>
-}
+}*@
